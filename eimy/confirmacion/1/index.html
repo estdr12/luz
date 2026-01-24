@@ -11,7 +11,7 @@
 <style>
 
 #rsvp-fondo-1 {
-  background-image: url("img/fondo\ papel\ copia.webp");
+  background-image: url("../img/fondo\ papel\ copia.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -55,7 +55,7 @@ a:focus {
 
 
 .fondo-blanco {
-  background: white;
+  background: rgb(222, 215, 208);
 }
 
 
@@ -136,7 +136,7 @@ a:focus {
 
 .mapa-contenedor.mapa-alt {
   background: rgb(239, 238, 233);  /* 🔥 ESTE es el nuevo color */
-  background-image: url("img/mapa\ copia.webp");
+  background-image: url("../img/mapa\ copia.webp");
   background-size: 100%;
 }
 
@@ -173,7 +173,7 @@ html, body {
   padding: 60px 20px;
   box-sizing: border-box;
   background: #f2f2f2; /* o el color que tengas */
-  background-image: url("img/mapa1\ copia.webp");
+  background-image: url("../img/mapa1\ copia.webp");
   background-size: 100%;
 }
 
@@ -289,7 +289,7 @@ html, body {
   text-align: center;
   box-sizing: border-box;
 
-    background-image: url(img/tiempo1\ copia.webp);
+    background-image: url(../img/tiempo1\ copia.webp);
   background-size: 100% 100%;   /* 🔥 ESTIRA aunque se deforme */
   background-position: center;
   background-repeat: no-repeat;
@@ -425,7 +425,7 @@ html, body {
 <body>
 
 <div class="imagen-abajo">
-  <img src="img/confirmar copia.webp" alt="Imagen inferior">
+  <img src="../img/confirmar1.webp" alt="Imagen inferior">
 </div>
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
@@ -445,13 +445,13 @@ html, body {
     required
   >
 
-  <input 
+  <!--<input 
     type="text" 
     name="entry.410584243" 
     placeholder="Nombre completo 2 (opcional)" 
   >
 
-  <!--<input
+  <input
     type="text" 
     name="entry.1215302517" 
     placeholder="Nombre completo 3 (opcional)" 
@@ -481,8 +481,14 @@ html, body {
 
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
+</div>
+
 <div class="imagen-abajo">
-  <img src="../img/RECUERDOS copia.webp" alt="Imagen inferior">
+  <img src="../img/itinerario.webp" alt="Imagen inferior">
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/recuerdos.webp" alt="Imagen inferior">
 </div>
 
 <div class="rsvp-contenedor fondo-blanco">
@@ -515,7 +521,7 @@ html, body {
 
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-</div>
+
 
 <script>
 function activarFormulario(formId, btnId, modo = "bloquear") {
