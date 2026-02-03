@@ -10,6 +10,115 @@
 
 <style>
 
+.sello {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+
+  width: 110px !important;
+  height: auto !important;
+
+  animation: brilloSello 2s ease-in-out infinite;
+}
+
+.sello img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+
+@keyframes brilloSello {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.4);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+
+/* 🔥 Quitar ripple azul en Android */
+.sobre,
+.sobre * {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* 🔥 Evita selección y glow fantasma */
+.sobre {
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ======================= */
+/* SOBRE PORTADA */
+/* ======================= */
+#portada-sobre {
+  position: fixed;
+  inset: 0;
+  background: #e6e6e6;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sobre {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  cursor: pointer;
+}
+
+.sobre img {
+  width: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Parte superior */
+.sobre-arriba {
+  position: absolute;
+  top: -8%;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  transition: transform 3s ease, opacity 2s ease;
+}
+
+/* Parte inferior */
+.sobre-abajo {
+  position: relative;
+  z-index: 1;
+  transition: transform 3s ease;
+}
+
+/* Estado abierto */
+#portada-sobre.abierto .sobre-arriba {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+#portada-sobre.abierto .sobre-abajo {
+  transform: translateY(100%);
+}
+
+/* Ocultar portada */
+#portada-sobre.oculto {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+
 #rsvp-fondo-1 {
   background-image: url("img/fondo\ papel\ copia.webp");
   background-size: cover;
@@ -424,6 +533,21 @@ html, body {
 
 <body>
 
+<div id="portada-sobre">
+  <div class="sobre" onclick="abrirInvitacion()">
+    <div class="sobre-arriba">
+      <img src="img/sobre-arriba.webp" alt="Sobre arriba">
+      <img src="img/sello.webp" class="sello" alt="Sello">
+
+    </div>
+    <div class="sobre-abajo">
+      <img src="img/sobre-abajo.webp" alt="Sobre abajo">
+    </div>
+  </div>
+</div>
+
+<div id="contenido-invitacion" style="display:none;">
+
 <!-- ======================= -->
 <!-- HERO -->
 <!-- ======================= -->
@@ -800,6 +924,25 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 document.querySelectorAll(".seccion").forEach(el => observer.observe(el));
+</script>
+
+</div>
+
+<script>
+document.body.style.overflow = "hidden";
+
+function abrirInvitacion() {
+  const portada = document.getElementById("portada-sobre");
+  const contenido = document.getElementById("contenido-invitacion");
+
+  portada.classList.add("abierto");
+
+  setTimeout(() => {
+    portada.classList.add("oculto");
+    contenido.style.display = "block";
+    document.body.style.overflow = "auto";
+  }, 1000);
+}
 </script>
 
 </body>
