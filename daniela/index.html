@@ -1058,8 +1058,8 @@ function abrirInvitacion() {
 
 <script>
 const canciones = [
-  { nombre: "Dynamite", src: "music/Dynamite.mp3" },
-  { nombre: "Butter", src: "music/Butter.mp3" },
+  { nombre: "Dynamite", src: "music/Dynamite1.mp3" },
+  { nombre: "Butter", src: "music/Butter1.mp3" },
   { nombre: "Permission to Dance", src: "music/Permission.mp3" }
 ];
 
@@ -1077,26 +1077,33 @@ function cargarCancion() {
 function playPause() {
   if (audio.paused) {
     audio.play();
-    playBtn.src = "img/pause.webp";
   } else {
     audio.pause();
-    playBtn.src = "img/play.webp";
   }
 }
+
 
 function siguiente() {
   indice = (indice + 1) % canciones.length;
   cargarCancion();
   audio.play();
-  playBtn.textContent = "⏸";
 }
 
 function anterior() {
   indice = (indice - 1 + canciones.length) % canciones.length;
   cargarCancion();
   audio.play();
-  playBtn.textContent = "⏸";
 }
+
+
+function actualizarBotonPlay() {
+  playBtn.src = "img/play.webp";
+}
+
+function actualizarBotonPause() {
+  playBtn.src = "img/pause.webp";
+}
+
 
 audio.addEventListener("timeupdate", () => {
   if (!audio.duration) return;
@@ -1109,6 +1116,8 @@ document.getElementById("progressBar").addEventListener("click", e => {
   audio.currentTime = (e.offsetX / ancho) * audio.duration;
 });
 
+audio.addEventListener("play", actualizarBotonPause);
+audio.addEventListener("pause", actualizarBotonPlay);
 audio.addEventListener("ended", siguiente);
 
 cargarCancion();
