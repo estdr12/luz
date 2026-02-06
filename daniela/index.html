@@ -10,6 +10,10 @@
 
 <style>
 
+/* ======================= */
+/* CAPA ANTI DESCARGA */
+/* ======================= */
+
 .apartado-botones {
   width: 100%;
   display: flex;
@@ -20,6 +24,18 @@
   background-color: #ffffff; /* color de fondo del apartado */
   border-radius: 16px;        /* opcional: esquinas redondeadas */
 }
+
+/* ======================= */
+/* BLOQUEO SOLO DE IMÁGENES GRANDES */
+/* ======================= */
+.imagen-abajo img,
+.hero img,
+.hero video {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 
 /* Estilo de los botones */
 .boton {
@@ -597,6 +613,20 @@ html, body {
   background: linear-gradient(135deg, #8e8e8e, #bdbdbd) !important;
 }
 
+/* ======================= */
+/* BOTÓN SIN EFECTO AL CLIC */
+/* ======================= */
+.boton:active,
+.boton:focus,
+.boton:visited {
+  transform: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.boton {
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* ======================= */
 /* ESCALADO REAL EN TABLET Y PC */
@@ -675,7 +705,6 @@ html, body {
 </div>
 
 <div id="contenido-invitacion" style="display:none;">
-
   
 <!-- ======================= -->
 <!-- HERO -->
@@ -945,8 +974,16 @@ html, body {
 </div>
 
 <div class="apartado-botones">
-  <a href="https://drive.google.com/drive/folders/1zf-RU53DbxoxeIsMT_qk0uigAFX1mS6R?usp=sharing" class="boton">Subir o ver fotos</a>
+  <a 
+    href="https://drive.google.com/drive/folders/1zf-RU53DbxoxeIsMT_qk0uigAFX1mS6R?usp=sharing"
+    class="boton"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Subir o ver fotos
+  </a>
 </div>
+
 
 
 <div class="imagen-abajo seccion">
@@ -1177,6 +1214,34 @@ audio.addEventListener("ended", siguiente);
 
 cargarCancion();
 </script>
+
+<script>
+/* Bloquear clic derecho */
+document.addEventListener("contextmenu", e => {
+  e.preventDefault();
+});
+
+/* Bloquear pulsación larga SOLO en imágenes grandes */
+document.addEventListener("touchstart", e => {
+  const target = e.target;
+
+  // ❌ NO bloquear controles de música
+  if (target.closest(".controles")) return;
+
+  // ❌ NO bloquear barra de progreso
+  if (target.closest(".barra")) return;
+
+  // ✅ Bloquear solo imágenes grandes decorativas
+  if (
+    target.closest(".imagen-abajo") ||
+    target.closest(".hero")
+  ) {
+    e.preventDefault();
+  }
+}, { passive: false });
+</script>
+
+
 
 </body>
 </html>

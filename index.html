@@ -6,6 +6,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+
+.menu-boton {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-boton:focus,
+.menu-boton:active {
+  outline: none;
+  background-color: transparent;
+}
+
+
+.menu-flotante {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.menu-contenido {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 8px 14px;
+
+  /* 🔥 base visible */
+  background-color: rgba(245, 245, 245, 0.85);
+
+  /* glass encima */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  box-shadow: none;
+}
+
+
+
+
+/* Imagen izquierda */
+.menu-imagen {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+/* Botones derecha */
+.menu-botones {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-boton {
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  color: #000;
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  background: transparent;
+}
+
+.boton-circular.seleccionado {
+  box-shadow:
+    0 0 0 1px #ffffff, /* espacio blanco */
+    0 0 0 4px #7a7a7a; /* aro negro externo */
+}
+
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus, button:focus {
+  outline: none;
+}
+
+
+.apartado-botones {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* 🔥 ESTO faltaba */
+  gap: 16px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+
+.boton {
+  display: inline-block;
+  padding: 8px 6%;
+
+  background-image: url("img/WhatsApp.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: transparent;
+  text-decoration: none;
+  border-radius: 30px;
+  
+
+  transition: filter 0.3s ease;
+}
+
+
+.boton:hover {
+  background-color: #ffffff; /* cambio de color al pasar mouse */
+}
     body {
       margin: 0;
       background: #ffffff;
@@ -32,27 +148,153 @@
       text-align: center;
     }
 
+    .imagen-abajo {
+  width: 100%;
+}
+
+.imagen-abajo img {
+  width: 100%;
+  height: auto;
+  display: block; /* evita espacios blancos raros */
+}
+
+/* BOTÓN CIRCULAR */
+.boton-circular {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 2px solid #ffffff; /* borde blanco del botón */
+  text-decoration: none;
+
+  transition: filter 0.3s ease;
+}
+
+
+/* Colores */
+.boton-morado {
+  background-color: #b182d8;
+}
+
+.boton-azul {
+  background-color: #9db3d2;
+}
+
+.boton-rojo {
+  background-color: #88242d;
+}
+
+/* Hover */
+.boton-circular:hover {
+  filter: brightness(1.15);
+}
+
+.apartado-botones-img {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* mismo espacio lados y centro */
+  padding: 16px;                  /* 🔥 espacio borde = espacio entre */
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.boton-img {
+  width: calc(50% - 8px); /* 2 botones exactos */
+  text-decoration: none;
+}
+
+.boton-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  border-radius: 0;     /* 🔥 sin esquinas redondeadas */
+  object-fit: contain;  /* 🔥 imagen completa */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
   </style>
   
 </head>
 <body>
 
-<div style="
-  display: flex;
-  justify-content: center; /* centra horizontal */
-  overflow: hidden;        /* evita scroll horizontal */
-">
-  <img 
-    src="img/luzinvitaciones.webp"
-    alt="Invitados XV Eimy"
-    style="
-      height: 250px;     /* mantiene proporciones */
-      display: block;
-    "
-  >
+<div class="menu-flotante">
+  <div class="menu-contenido">
+
+    <img src="img/logo.webp" class="menu-imagen" alt="">
+
+    <div class="menu-botones">
+      <a href="#seccion1" class="menu-boton">Catálogo</a>
+      <a href="#seccion2" class="menu-boton">Precios</a>
+    </div>
+
+  </div>
 </div>
 
-<p style="text-align: center;">Agrega luzinvitaciones.com/nombre para ver tu invitación</p>
+
+<div class="imagen-abajo">
+  <img src="img/principio.webp" alt="Imagen inferior">
+</div>
+
+<div class="apartado-botones">
+    <a 
+    href="https://drive.google.com/drive/folders/1zf-RU53DbxoxeIsMT_qk0uigAFX1mS6R?usp=sharing"
+    class="boton"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Subir o ver fotos
+  </a>
+
+</div>
+
+<div class="imagen-abajo" id="seccion1">
+  <img src="img/p1.webp" alt="Imagen inferior">
+</div>
+
+<div class="apartado-botones">
+  <a  class="boton-circular boton-morado"></a>
+  <a  class="boton-circular boton-azul seleccionado"></a>
+  <a  class="boton-circular boton-rojo"></a>
+</div>
+
+<div class="apartado-botones-img">
+  <a href="https://ejemplo1.com" class="boton-img">
+    <img src="img/Sin título-2.webp" alt="">
+  </a>
+
+  <a href="https://ejemplo2.com" class="boton-img">
+    <img src="img/Sin 22.webp" alt="">
+  </a>
+</div>
+
+<div class="imagen-abajo">
+  <img src="img/incluye.webp" alt="Imagen inferior">
+</div>
+
+<script>
+document.querySelectorAll(".boton-circular").forEach(boton => {
+  boton.addEventListener("click", () => {
+
+    // Quita selección a todos
+    document.querySelectorAll(".boton-circular")
+      .forEach(b => b.classList.remove("seleccionado"));
+
+    // Activa el clickeado
+    boton.classList.add("seleccionado");
+
+  });
+});
+</script>
+
 
 </body>
 </html>
