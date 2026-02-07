@@ -10,6 +10,16 @@
 
 <style>
 
+/* 🔒 Quitar pulsación larga SOLO en botones de música */
+.controles img {
+  -webkit-touch-callout: none; /* iOS: quita menú */
+  -webkit-user-select: none;
+  user-select: none;
+
+  pointer-events: auto; /* sigue siendo clickeable */
+}
+
+
 /* ======================= */
 /* CAPA ANTI DESCARGA */
 /* ======================= */
@@ -1220,6 +1230,15 @@ document.addEventListener("touchstart", e => {
   if (e.touches.length > 1) return; // no multitouch
 
   const target = e.target;
+
+  if (
+    target.closest(".imagen-abajo img") ||
+    target.closest(".hero img") ||
+    target.closest(".hero video")
+  ) {
+    // NO uses preventDefault aquí
+    target.style.webkitTouchCallout = "none";
+  }
 });
 
 </script>
