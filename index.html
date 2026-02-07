@@ -7,6 +7,19 @@
 
   <style>
 
+/* ANIMACIÓN AL HACER SCROLL */
+.seccion {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 1s ease;
+}
+
+.seccion.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 .menu-boton {
   -webkit-tap-highlight-color: transparent;
 }
@@ -289,7 +302,7 @@ html {
   </a>
 </div>
 
-<div class="imagen-abajo" id="seccion2">
+<div class="imagen-abajo seccion" id="seccion2">
   <img src="img/incluye1.webp" alt="Imagen inferior">
 </div>
 
@@ -305,7 +318,7 @@ html {
 
 </div>
 
-<div class="imagen-abajo">
+<div class="imagen-abajo seccion">
   <img src="img/libro.webp" alt="Imagen inferior">
 </div>
 
@@ -322,6 +335,18 @@ document.querySelectorAll(".boton-circular").forEach(boton => {
 
   });
 });
+</script>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".seccion").forEach(el => observer.observe(el));
 </script>
 
 

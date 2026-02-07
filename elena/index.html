@@ -10,6 +10,149 @@
 
 <style>
 
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+
+/* 🔒 Quitar pulsación larga SOLO en botones de música */
+.controles img {
+  -webkit-touch-callout: none; /* iOS: quita menú */
+  -webkit-user-select: none;
+  user-select: none;
+
+  pointer-events: auto; /* sigue siendo clickeable */
+}
+
+
+/* ======================= */
+/* CAPA ANTI DESCARGA */
+/* ======================= */
+
+.apartado-botones {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;           /* espacio entre botones */
+  padding: 20px;       /* espacio interno */
+  box-sizing: border-box;
+  background-color: #ffffff; /* color de fondo del apartado */
+  border-radius: 16px;        /* opcional: esquinas redondeadas */
+}
+
+.botonfotos {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #6c0000;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 1rem;
+}
+
+/* ======================= */
+/* BLOQUEO SOLO DE IMÁGENES GRANDES */
+/* ======================= */
+.imagen-abajo img,
+.hero img,
+.hero video {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* responsive: en móviles se ponen uno debajo del otro */
+@media (max-width: 480px) {
+  .apartado-botones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boton-doble {
+    width: 80%;
+    max-width: none;
+  }
+}
+
+
+  /* ======================= */
+/* SECCIÓN MÚSICA */
+/* ======================= */
+.seccion-musica {
+  width: 100%;
+  background: #863737; /* morado */
+  padding: 25px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.musica-contenido {
+  width: 100%;
+  max-width: 520px;
+  padding: 0 20px;   /* 🔥 aquí controlas el margen real */
+  box-sizing: border-box;
+  text-align: center;
+
+  color: white;
+}
+
+
+/* Nombre canción */
+.cancion-nombre {
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+
+/* Barra */
+.barra {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.progreso {
+  height: 100%;
+  width: 0%;
+  background: #ffffff;
+}
+
+.controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px; /* un poco más compacto */
+}
+
+/* Prev y Next */
+.controles img:not(#playBtn) {
+  width: 25px;   /* 🔥 más chicos */
+}
+
+/* Play / Pause */
+#playBtn {
+  width: 45px;   /* 🔥 más grande */
+}
+
+/* efecto al tocar */
+.controles img:active {
+  transform: scale(0.965);
+}
+
+.controles img {
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
 .sello {
   position: absolute;
   top: 55%;
@@ -602,6 +745,31 @@ html, body {
   <img src="xv/11 copia.webp" alt="Imagen inferior">
 </div>
 
+<!-- ======================= -->
+<!-- SECCIÓN MÚSICA -->
+<!-- ======================= -->
+<div class="seccion-musica">
+
+  <div class="musica-contenido">
+
+    <div class="cancion-nombre" id="songTitle">Canción</div>
+
+    <div class="barra" id="progressBar">
+      <div class="progreso" id="progress"></div>
+    </div>
+
+    <div class="controles">
+      <img src="img/prev.webp" alt="Anterior" onclick="anterior()">
+      <img src="img/play.webp" alt="Play" id="playBtn" onclick="playPause()">
+      <img src="img/next.webp" alt="Siguiente" onclick="siguiente()">
+    </div>
+
+    <audio id="audio"></audio>
+
+  </div>
+
+</div>
+
 <div class="imagen-abajo">
   <img src="img/padres,padrinosb copia.webp" alt="Imagen inferior">
 </div>
@@ -774,13 +942,20 @@ html, body {
 
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-
-
 </div>
-
 
 <div class="imagen-abajo">
   <img src="img/Sin título-7 copia.webp" alt="Imagen inferior">
+</div>
+
+<div class="imagen-abajo">
+  <img src="img/fotos.webp" alt="Imagen inferior">
+</div>
+
+<div class="apartado-botones">
+  <a class="botonfotos" href="https://photos.app.goo.gl/WorGPJVcnPQzoJQC7" target="_blank">
+    Subir o ver fotos
+  </a>
 </div>
 
 <div class="imagen-abajo seccion">
@@ -943,5 +1118,92 @@ function abrirInvitacion() {
   }, 1000);
 }
 </script>
+
+<script>
+const canciones = [
+  { nombre: "Dynamite", src: "music/Dynamite1.mp3" },
+  { nombre: "Butter", src: "music/Butter1.mp3" },
+  { nombre: "Permission to Dance", src: "music/Permission.mp3" }
+];
+
+let indice = 0;
+const audio = document.getElementById("audio");
+const progress = document.getElementById("progress");
+const songTitle = document.getElementById("songTitle");
+const playBtn = document.getElementById("playBtn");
+
+function cargarCancion() {
+  audio.src = canciones[indice].src;
+  songTitle.textContent = canciones[indice].nombre;
+}
+
+function playPause() {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+
+
+function siguiente() {
+  indice = (indice + 1) % canciones.length;
+  cargarCancion();
+  audio.play();
+}
+
+function anterior() {
+  indice = (indice - 1 + canciones.length) % canciones.length;
+  cargarCancion();
+  audio.play();
+}
+
+
+function actualizarBotonPlay() {
+  playBtn.src = "img/play.webp";
+}
+
+function actualizarBotonPause() {
+  playBtn.src = "img/pause.webp";
+}
+
+
+audio.addEventListener("timeupdate", () => {
+  if (!audio.duration) return;
+  const porcentaje = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = porcentaje + "%";
+});
+
+document.getElementById("progressBar").addEventListener("click", e => {
+  const ancho = e.currentTarget.clientWidth;
+  audio.currentTime = (e.offsetX / ancho) * audio.duration;
+});
+
+audio.addEventListener("play", actualizarBotonPause);
+audio.addEventListener("pause", actualizarBotonPlay);
+audio.addEventListener("ended", siguiente);
+
+cargarCancion();
+</script>
+
+<script>
+document.addEventListener("touchstart", e => {
+  if (e.touches.length > 1) return; // no multitouch
+
+  const target = e.target;
+
+  if (
+    target.closest(".imagen-abajo img") ||
+    target.closest(".hero img") ||
+    target.closest(".hero video")
+  ) {
+    // NO uses preventDefault aquí
+    target.style.webkitTouchCallout = "none";
+  }
+});
+
+</script>
+
+
 </body>
 </html>
