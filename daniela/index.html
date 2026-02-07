@@ -1220,19 +1220,9 @@ document.addEventListener("touchstart", e => {
   if (e.touches.length > 1) return; // no multitouch
 
   const target = e.target;
-
-  if (
-    target.closest(".imagen-abajo img") ||
-    target.closest(".hero img") ||
-    target.closest(".hero video")
-  ) {
-    // NO uses preventDefault aquí
-    target.style.webkitTouchCallout = "none";
-  }
 });
+
 </script>
-
-
 
 </body>
 </html>
