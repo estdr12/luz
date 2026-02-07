@@ -1216,29 +1216,20 @@ cargarCancion();
 </script>
 
 <script>
-/* Bloquear clic derecho */
-document.addEventListener("contextmenu", e => {
-  e.preventDefault();
-});
-
-/* Bloquear pulsación larga SOLO en imágenes grandes */
 document.addEventListener("touchstart", e => {
+  if (e.touches.length > 1) return; // no multitouch
+
   const target = e.target;
 
-  // ❌ NO bloquear controles de música
-  if (target.closest(".controles")) return;
-
-  // ❌ NO bloquear barra de progreso
-  if (target.closest(".barra")) return;
-
-  // ✅ Bloquear solo imágenes grandes decorativas
   if (
-    target.closest(".imagen-abajo") ||
-    target.closest(".hero")
+    target.closest(".imagen-abajo img") ||
+    target.closest(".hero img") ||
+    target.closest(".hero video")
   ) {
-    e.preventDefault();
+    // NO uses preventDefault aquí
+    target.style.webkitTouchCallout = "none";
   }
-}, { passive: false });
+});
 </script>
 
 
