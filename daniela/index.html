@@ -10,6 +10,14 @@
 
 <style>
 
+/* 🔒 Quitar efecto claro / highlight al tocar */
+.boton {
+  -webkit-tap-highlight-color: transparent; /* Android / iOS */
+  -webkit-touch-callout: none;               /* iOS menú */
+  user-select: none;
+}
+
+
 /* 🔒 Quitar pulsación larga SOLO en botones de música */
 .controles img {
   -webkit-touch-callout: none; /* iOS: quita menú */
