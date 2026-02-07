@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi invitación</title>
+  <title>Luz invitaciones</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -284,6 +284,14 @@ html {
   transition: all 0.8s ease;
 }
 
+/* 🔒 Bloquear selección y menú largo en móvil */
+img, a {
+  -webkit-touch-callout: none; /* iOS */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
   </style>
   
@@ -475,6 +483,11 @@ document.querySelectorAll(".menu-boton").forEach(boton => {
 });
 </script>
 
+<script>
+document.addEventListener("contextmenu", e => {
+  e.preventDefault();
+});
+</script>
 
 </body>
 </html>
