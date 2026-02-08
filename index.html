@@ -454,22 +454,27 @@ botones.forEach(boton => {
 </script>
 
 <script>
-const observer = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target); // 🔥 evita fallos futuros
-    }
-  });
-}, {
-  threshold: 0.15,
-  rootMargin: "0px 0px -50px 0px"
-});
+window.addEventListener("load", () => {
 
-document.querySelectorAll(".seccion").forEach(el => {
-  observer.observe(el);
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  });
+
+  document.querySelectorAll(".seccion").forEach(el => {
+    observer.observe(el);
+  });
+
 });
 </script>
+
 
 
 <script>
