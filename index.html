@@ -7,161 +7,180 @@
 
   <style>
 
-html {
-  scrollbar-width: none; /* Firefox */
-}
-
-body::-webkit-scrollbar {
-  display: none; /* Chrome / Safari */
-}
-
-/* ANIMACIÓN AL HACER SCROLL */
-.seccion {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: all 1s ease;
-}
-
-.seccion.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-.menu-boton {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.menu-boton:focus,
-.menu-boton:active {
-  outline: none;
-  background-color: transparent;
-}
-
-
-.menu-flotante {
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
-
-.menu-contenido {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 8px 14px;
-
-  /* 🔥 base visible */
-  background-color: rgba(245, 245, 245, 0.85);
-
-  /* glass encima */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  box-shadow: none;
-}
-
-
-/* Imagen izquierda */
-.menu-imagen {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-}
-
-/* Botones derecha */
-.menu-botones {
-  display: flex;
-  gap: 10px;
-}
-
-.menu-boton {
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  font-size: 0.85rem;
-  color: #000;
-
-  padding: 6px 12px;
-  border-radius: 999px;
-
-  background: transparent;
-}
-
-.boton-circular.seleccionado {
-  box-shadow:
-    0 0 0 1px #ffffff, /* espacio blanco */
-    0 0 0 4px #7a7a7a; /* aro negro externo */
-}
-
-a, button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-a:focus, button:focus {
-  outline: none;
-}
-
-
-.apartado-botones {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;   /* 🔥 ESTO faltaba */
-  gap: 16px;
-  padding: 10px 0;
-  box-sizing: border-box;
-  background-color: #ffffff;
-}
-
-.boton {
-  display: inline-block;
-  padding: 8px 6%;
-
-  background-image: url("img/WhatsApp1.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  color: transparent;
-  text-decoration: none;
-  border-radius: 30px;
-  
-
-  transition: filter 0.3s ease;
-}
-
-.boton1 {
-  display: inline-block;
-  padding: 12px 10%;
-
-  background-image: url("img/WhatsApp\ copia.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  color: transparent;
-  text-decoration: none;
-  border-radius: 30px;
-  
-
-  transition: filter 0.3s ease;
-}
-
-.boton:hover {
-  background-color: #ffffff; /* cambio de color al pasar mouse */
-}
+    /* --- AJUSTE PARA VISTA TIPO CELULAR EN PC --- */
     body {
       margin: 0;
-      background: #ffffff;
+      /* Fondo gris para que resalte la "vista móvil" en PC */
+      background-color: #f0f2f5; 
       font-family: Arial, sans-serif;
     }
 
+    /* Este es el contenedor que simula el celular */
+    .contenedor-principal {
+      max-width: 420px; /* Ancho máximo similar a un móvil */
+      margin: 0 auto;   /* Centrar en pantalla */
+      background-color: #ffffff; /* Fondo blanco del contenido */
+      min-height: 100vh; /* Que ocupe al menos toda la altura */
+      box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Sombra estética para PC */
+      position: relative;
+    }
+    /* ------------------------------------------- */
+
+    html {
+      scrollbar-width: none; /* Firefox */
+      scroll-behavior: smooth;
+    }
+
+    body::-webkit-scrollbar {
+      display: none; /* Chrome / Safari */
+    }
+
+    /* ANIMACIÓN AL HACER SCROLL */
+    .seccion {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 1s ease;
+    }
+
+    .seccion.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    .menu-boton {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-boton:focus,
+    .menu-boton:active {
+      outline: none;
+      background-color: transparent;
+    }
+
+
+    .menu-flotante {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      /* Aseguramos que el menú no sea más ancho que el contenedor simulado */
+      width: max-content; 
+      max-width: 90%;
+    }
+
+    .menu-contenido {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 8px 14px;
+
+      /* 🔥 base visible */
+      background-color: rgba(245, 245, 245, 0.85);
+
+      /* glass encima */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+
+      box-shadow: none;
+    }
+
+
+    /* Imagen izquierda */
+    .menu-imagen {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    /* Botones derecha */
+    .menu-botones {
+      display: flex;
+      gap: 10px;
+    }
+
+    .menu-boton {
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: #000;
+
+      padding: 6px 12px;
+      border-radius: 999px;
+
+      background: transparent;
+    }
+
+    .boton-circular.seleccionado {
+      box-shadow:
+        0 0 0 1px #ffffff, /* espacio blanco */
+        0 0 0 4px #7a7a7a; /* aro negro externo */
+    }
+
+    a, button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a:focus, button:focus {
+      outline: none;
+    }
+
+
+    .apartado-botones {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;   /* 🔥 ESTO faltaba */
+      gap: 16px;
+      padding: 10px 0;
+      box-sizing: border-box;
+      background-color: #ffffff;
+    }
+
+    .boton {
+      display: inline-block;
+      padding: 8px 6%;
+
+      background-image: url("img/WhatsApp1.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      color: transparent;
+      text-decoration: none;
+      border-radius: 30px;
+      
+
+      transition: filter 0.3s ease;
+    }
+
+    .boton1 {
+      display: inline-block;
+      padding: 12px 10%;
+
+      background-image: url("img/WhatsApp\ copia.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      color: transparent;
+      text-decoration: none;
+      border-radius: 30px;
+      
+
+      transition: filter 0.3s ease;
+    }
+
+    .boton:hover {
+      background-color: #ffffff; /* cambio de color al pasar mouse */
+    }
+    
+    /* Clase antigua mantenida por si acaso, aunque contenedor-principal manda ahora */
     .contenedor {
       max-width: 600px;
       margin: auto;
@@ -183,247 +202,236 @@ a:focus, button:focus {
     }
 
     .imagen-abajo {
-  width: 100%;
-}
+      width: 100%;
+    }
 
-.imagen-abajo img {
-  width: 100%;
-  height: auto;
-  display: block; /* evita espacios blancos raros */
-}
+    .imagen-abajo img {
+      width: 100%;
+      height: auto;
+      display: block; /* evita espacios blancos raros */
+    }
 
-/* BOTÓN CIRCULAR */
-.boton-circular {
-  width: 36px;
-  height: 36px;
+    /* BOTÓN CIRCULAR */
+    .boton-circular {
+      width: 36px;
+      height: 36px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  border-radius: 50%;
-  border: 2px solid #ffffff; /* borde blanco del botón */
-  text-decoration: none;
+      border-radius: 50%;
+      border: 2px solid #ffffff; /* borde blanco del botón */
+      text-decoration: none;
 
-  transition: filter 0.3s ease;
-}
-
-
-/* Colores */
-.boton-morado {
-  background-color: #b182d8;
-}
-
-.boton-azul {
-  background-color: #9db3d2;
-}
-
-.boton-rojo {
-  background-color: #88242d;
-}
-
-/* Hover */
-.boton-circular:hover {
-  filter: brightness(1.15);
-}
-
-.apartado-botones-img {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 🔥 2 botones por fila */
-  gap: 16px;                              /* mismo espacio horizontal y vertical */
-  padding: 16px;
-  box-sizing: border-box;
-  background-color: #ffffff;
-}
-
-.boton-img {
-  width: 100%;
-  text-decoration: none;
-}
+      transition: filter 0.3s ease;
+    }
 
 
-.boton-img img {
-  width: 100%;
-  height: auto;
-  display: block;
+    /* Colores */
+    .boton-morado {
+      background-color: #b182d8;
+    }
 
-  border-radius: 18px;     /* 🔥 sin esquinas redondeadas */
-  object-fit: contain;  /* 🔥 imagen completa */
-}
+    .boton-azul {
+      background-color: #9db3d2;
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    .boton-rojo {
+      background-color: #88242d;
+    }
 
-.grupo {
-  display: none;
-}
+    /* Hover */
+    .boton-circular:hover {
+      filter: brightness(1.15);
+    }
 
-.grupo.activo {
-  display: grid;
-}
+    .apartado-botones-img {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 🔥 2 botones por fila */
+      gap: 16px;                              /* mismo espacio horizontal y vertical */
+      padding: 16px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+    }
 
-.grupo {
-  display: none;
-}
+    .boton-img {
+      width: 100%;
+      text-decoration: none;
+    }
 
-.grupo.activo {
-  display: grid;
-}
 
-/* ✨ animación al mostrarse */
-.grupo.animar {
-  opacity: 0;
-  transform: translateY(15px);
-}
+    .boton-img img {
+      width: 100%;
+      height: auto;
+      display: block;
 
-.grupo.animar.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.8s ease;
-}
+      border-radius: 18px;     /* 🔥 sin esquinas redondeadas */
+      object-fit: contain;  /* 🔥 imagen completa */
+    }
 
-/* 🔒 Bloquear selección y menú largo en móvil */
-img, a {
-  -webkit-touch-callout: none; /* iOS */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+    .grupo {
+      display: none;
+    }
+
+    .grupo.activo {
+      display: grid;
+    }
+
+    /* ✨ animación al mostrarse */
+    .grupo.animar {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .grupo.animar.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease;
+    }
+
+    /* 🔒 Bloquear selección y menú largo en móvil */
+    img, a {
+      -webkit-touch-callout: none; /* iOS */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
   </style>
   
 </head>
 <body>
 
-<div class="menu-flotante">
-  <div class="menu-contenido">
+<main class="contenedor-principal">
 
-    <img src="img/logo.webp" class="menu-imagen" alt="">
+  <div class="menu-flotante">
+    <div class="menu-contenido">
 
-    <div class="menu-botones">
-<a href="#" class="menu-boton" data-scroll="seccion1">Catálogo</a>
-<a href="#" class="menu-boton" data-scroll="seccion2">Precios</a>
+      <img src="img/logo.webp" class="menu-imagen" alt="">
+
+      <div class="menu-botones">
+        <a href="#" class="menu-boton" data-scroll="seccion1">Catálogo</a>
+        <a href="#" class="menu-boton" data-scroll="seccion2">Precios</a>
+      </div>
 
     </div>
+  </div>
+
+
+  <div class="imagen-abajo">
+    <img src="img/principio.webp" alt="Imagen inferior">
+  </div>
+
+  <div class="apartado-botones">
+      <a 
+      href="https://wa.me/+526621144950"
+      class="boton"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Subir o ver fotos
+    </a>
 
   </div>
-</div>
+
+  <div class="imagen-abajo" id="seccion1">
+    <img src="img/p1.webp" alt="Imagen inferior">
+  </div>
+
+  <div class="apartado-botones">
+    <a class="boton-circular boton-morado" data-grupo="lila"></a>
+    <a class="boton-circular boton-azul seleccionado" data-grupo="azul"></a>
+    <a class="boton-circular boton-rojo" data-grupo="rojo"></a>
+  </div>
 
 
-<div class="imagen-abajo">
-  <img src="img/principio.webp" alt="Imagen inferior">
-</div>
+  <div class="apartado-botones-img grupo grupo-azul activo animar visible">
 
-<div class="apartado-botones">
-    <a 
-    href="https://wa.me/+526621144950"
-    class="boton"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Subir o ver fotos
-  </a>
+    <a href="https://luzinvitaciones.com/azul/vestido" class="boton-img">
+      <img src="img/portadas/vestidoazul.webp" alt="">
+    </a>
 
-</div>
+    <a href="https://luzinvitaciones.com/azul/reloj" class="boton-img">
+      <img src="img/portadas/relojazul.webp" alt="">
+    </a>
+    
+    <a href="https://luzinvitaciones.com/azul/alambre" class="boton-img">
+      <img src="img/portadas/alambreazul.webp" alt="">
 
-<div class="imagen-abajo" id="seccion1">
-  <img src="img/p1.webp" alt="Imagen inferior">
-</div>
+    </a>
 
-<div class="apartado-botones">
-  <a class="boton-circular boton-morado" data-grupo="lila"></a>
-  <a class="boton-circular boton-azul seleccionado" data-grupo="azul"></a>
-  <a class="boton-circular boton-rojo" data-grupo="rojo"></a>
-</div>
+      <a href="https://luzinvitaciones.com/azul/foto" class="boton-img">
+      <img src="img/portadas/fotoazul.webp" alt="">
+    </a>
 
+  </div>
 
-<div class="apartado-botones-img grupo grupo-azul activo animar visible">
+  <div class="apartado-botones-img grupo grupo-rojo">
 
-  <a href="https://luzinvitaciones.com/azul/vestido" class="boton-img">
-    <img src="img/portadas/vestidoazul.webp" alt="">
-  </a>
+    <a href="https://luzinvitaciones.com/rojo/vestido" class="boton-img">
+      <img src="img/portadas/vestidorojo.webp" alt="">
+    </a>
 
-  <a href="https://luzinvitaciones.com/azul/reloj" class="boton-img">
-    <img src="img/portadas/relojazul.webp" alt="">
-  </a>
-  
-  <a href="https://luzinvitaciones.com/azul/alambre" class="boton-img">
-    <img src="img/portadas/alambreazul.webp" alt="">
+    <a href="https://luzinvitaciones.com/rojo/reloj" class="boton-img">
+      <img src="img/portadas/relojrojo.webp" alt="">
+    </a>
+    
+    <a href="https://luzinvitaciones.com/rojo/alambre" class="boton-img">
+      <img src="img/portadas/alambrerojo.webp" alt="">
 
-  </a>
+    </a>
 
-    <a href="https://luzinvitaciones.com/azul/foto" class="boton-img">
-    <img src="img/portadas/fotoazul.webp" alt="">
-  </a>
+      <a href="https://luzinvitaciones.com/rojo/foto" class="boton-img">
+      <img src="img/portadas/fotorojo.webp" alt="">
+    </a>
 
-</div>
+  </div>
 
-<div class="apartado-botones-img grupo grupo-rojo">
+  <div class="apartado-botones-img grupo grupo-lila">
 
-  <a href="https://luzinvitaciones.com/rojo/vestido" class="boton-img">
-    <img src="img/portadas/vestidorojo.webp" alt="">
-  </a>
+    <a href="https://luzinvitaciones.com/lila/vestido" class="boton-img">
+      <img src="img/portadas/vestidolila.webp" alt="">
+    </a>
 
-  <a href="https://luzinvitaciones.com/rojo/reloj" class="boton-img">
-    <img src="img/portadas/relojrojo.webp" alt="">
-  </a>
-  
-  <a href="https://luzinvitaciones.com/rojo/alambre" class="boton-img">
-    <img src="img/portadas/alambrerojo.webp" alt="">
+    <a href="https://luzinvitaciones.com/lila/reloj" class="boton-img">
+      <img src="img/portadas/relojlila.webp" alt="">
+    </a>
+    
+    <a href="https://luzinvitaciones.com/lila/alambre" class="boton-img">
+      <img src="img/portadas/alambrelila.webp" alt="">
 
-  </a>
+    </a>
 
-    <a href="https://luzinvitaciones.com/rojo/foto" class="boton-img">
-    <img src="img/portadas/fotorojo.webp" alt="">
-  </a>
+      <a href="https://luzinvitaciones.com/lila/foto" class="boton-img">
+      <img src="img/portadas/fotolila.webp" alt="">
+    </a>
 
-</div>
+  </div>
 
-<div class="apartado-botones-img grupo grupo-lila">
+  <div class="imagen-abajo seccion" id="seccion2">
+    <img src="img/incluye1.webp" alt="Imagen inferior">
+  </div>
 
-  <a href="https://luzinvitaciones.com/lila/vestido" class="boton-img">
-    <img src="img/portadas/vestidolila.webp" alt="">
-  </a>
+  <div class="apartado-botones">
+      <a 
+      href="https://wa.me/+526621144950"
+      class="boton1"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Subir o ver fotos
+    </a>
 
-  <a href="https://luzinvitaciones.com/lila/reloj" class="boton-img">
-    <img src="img/portadas/relojlila.webp" alt="">
-  </a>
-  
-  <a href="https://luzinvitaciones.com/lila/alambre" class="boton-img">
-    <img src="img/portadas/alambrelila.webp" alt="">
+  </div>
 
-  </a>
+  <div class="imagen-abajo seccion">
+    <img src="img/libro.webp" alt="Imagen inferior">
+  </div>
 
-    <a href="https://luzinvitaciones.com/lila/foto" class="boton-img">
-    <img src="img/portadas/fotolila.webp" alt="">
-  </a>
-
-</div>
-
-<div class="imagen-abajo seccion" id="seccion2">
-  <img src="img/incluye1.webp" alt="Imagen inferior">
-</div>
-
-<div class="apartado-botones">
-    <a 
-    href="https://wa.me/+526621144950"
-    class="boton1"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Subir o ver fotos
-  </a>
-
-</div>
-
-<div class="imagen-abajo seccion">
-  <img src="img/libro.webp" alt="Imagen inferior">
-</div>
-
-<script>
+</main> <script>
 const botones = document.querySelectorAll(".boton-circular");
 const grupos = document.querySelectorAll(".grupo");
 
