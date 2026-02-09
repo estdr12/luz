@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Daniela XV</title>
+
+<style>
+  /* ================= RESET Y BASES ================= */
+  html { scrollbar-width: none; }
+  body::-webkit-scrollbar { display: none; }
+  * { 
+    -webkit-tap-highlight-color: transparent; 
+    -webkit-user-select: none; 
+    user-select: none; 
+    box-sizing: border-box; 
+  }
+  button:focus, input:focus, a:focus { outline: none; box-shadow: none; }
+  
+  html, body {
+    margin: 0; padding: 0; 
+    width: 100%; height: 100%;
+    font-family: Arial, sans-serif; 
+    background: #f0f2f5; /* Fondo oscuro para resaltar el "celular" en PC */
+  }
+
+  /* ================= CONTENEDOR TIPO CELULAR ================= */
+  #contenido-invitacion {
+    width: 100%;
+    max-width: 480px; /* 🔥 LÍMITE DE ANCHO FIJO (Tamaño iPhone Max) */
+    margin: 0 auto;   /* Centra el bloque en la pantalla */
+    background: #f0f2f5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: none; /* Se activa con JS */
+    box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Sombra elegante en PC */
+  }
+
+  /* ================= SOBRE (APERTURA) ================= */
+  #portada-sobre {
+    position: fixed; inset: 0; background: #f0f2f5; z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .sobre { position: relative; width: 100%; max-width: 480px; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Sombra elegante en PC */}
+  .sobre img { width: 100%; display: block; pointer-events: none; }
+  .sobre-arriba { position: absolute; top: -8%; left: 0; width: 100%; z-index: 2; transition: transform 3s ease, opacity 2s ease; }
+  .sobre-abajo { position: relative; z-index: 1; transition: transform 3s ease; }
+  
+  .sello {
+    position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+    z-index: 3; width: 110px !important; height: auto !important;
+    animation: brilloSello 2s ease-in-out infinite; pointer-events: none;
+  }
+  @keyframes brilloSello { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.4); } }
+
+  #portada-sobre.abierto .sobre-arriba { transform: translateY(-100%); opacity: 0; }
+  #portada-sobre.abierto .sobre-abajo { transform: translateY(100%); }
+  #portada-sobre.oculto { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+
+  /* ================= IMÁGENES Y HERO ================= */
+  .hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: black; }
+  .hero img, .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  
+  .imagen-abajo { width: 100%; display: block; }
+  .imagen-abajo img { width: 100%; height: auto; display: block; pointer-events: none; }
+
+  .seccion { opacity: 0; transform: translateY(15px); transition: all 1s ease; }
+  .seccion.visible { opacity: 1; transform: translateY(0); }
+
+  /* ================= CONTADOR (CORREGIDO) ================= */
+  .contador-box {
+    width: 100%; padding: 30px 10px; text-align: center;
+    background-image: url(img/tiempo1\ copia.webp); background-size: cover;
+    background-position: center;
+  }
+  .contador { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; /* 🔥 Espacio fijo, no dinámico */
+  }
+  .bloque { display: flex; flex-direction: column; align-items: center; min-width: 45px; }
+  
+  /* 🔥 FUENTES FIJAS: Ya no usamos VW para evitar que exploten en PC */
+  .numero { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 2.5rem; /* Tamaño seguro para 420px */
+    color: #fff; 
+    font-weight: normal;
+  }
+  .etiqueta { font-size: 0.8rem; letter-spacing: 1px; color: #bdbdbd; margin-top: 5px; }
+  .separador { font-size: 2rem; font-weight: bold; color: #fff; margin-bottom: 15px; }
+  #segundos { color: #e8c37a; }
+
+  /* ================= MÚSICA ================= */
+  .seccion-musica { width: 100%; background: #8798ac; padding: 25px 0; display: flex; justify-content: center; }
+  .musica-contenido { width: 90%; text-align: center; color: white; }
+  .cancion-nombre { font-size: 1.2rem; margin-bottom: 14px; }
+  .barra { width: 100%; height: 4px; background: rgba(255,255,255,0.35); border-radius: 10px; overflow: hidden; cursor: pointer; margin-bottom: 14px; }
+  .progreso { height: 100%; width: 0%; background: #ffffff; }
+  .controles { display: flex; justify-content: center; align-items: center; gap: 30px; }
+  .controles img { width: 25px; transition: transform 0.2s; cursor: pointer; }
+  .controles img:active { transform: scale(0.9); }
+  #playBtn { width: 45px; }
+
+  /* ================= MAPAS ================= */
+  .mapa-contenedor {
+    width: 100%; display: flex; flex-direction: column; align-items: center;
+    padding: 30px 20px; gap: 20px; text-align: center; background: #f2f2f2;
+    background-image: url("img/mapa1\ copia.webp"); background-size: cover;
+  }
+  .mapa-contenedor.mapa-alt { background: rgb(239, 238, 233); background-image: url("img/mapa\ copia.webp"); }
+  
+  .info-evento { font-family: "Times New Roman", Times, serif; }
+  .info-evento h2 { margin: 0 0 10px 0; font-weight: normal; font-size: 1.8rem; }
+  .info-evento p { margin: 4px 0; font-size: 1rem; }
+  
+  .mapa { width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+  .boton-mapa {
+    display: inline-block; padding: 12px 24px; background: #8b9bb1;
+    color: white; text-decoration: none; border-radius: 30px; font-size: 1rem;
+  }
+
+  /* ================= FORMS & RSVP (CORREGIDO) ================= */
+  .rsvp-contenedor { padding: 0 20px 30px; text-align: center; font-family: "Times New Roman", Times, serif; }
+  #rsvp-fondo-1 { background-image: url("img/fondo\ papel\ copia.webp"); background-size: cover; }
+  .fondo-blanco { background: white; }
+  
+  .rsvp-form { 
+    width: 100%; 
+    max-width: 100%; /* 🔥 Se adapta al contenedor de 420px, no crece más */
+    margin: 0 auto; 
+    display: flex; flex-direction: column; gap: 15px; 
+  }
+  
+  /* 🔥 INPUTS PROPORCIONALES */
+  .rsvp-form input, .rsvp-form button { 
+    width: 100%; 
+    padding: 15px 10px; 
+    font-size: 1rem; /* Letra tamaño estándar */
+    border: none; outline: none; 
+    box-sizing: border-box;
+  }
+  
+  .rsvp-form input {
+    background: linear-gradient(#ccc, #ccc) no-repeat;
+    background-size: 100% 2px; background-position: 0 85%;
+    border-radius: 0;
+  }
+  
+  .rsvp-form button {
+    border-radius: 30px; background: #0e4571; color: white; cursor: pointer;
+    transition: background 0.5s ease;
+    margin-top: 10px;
+  }
+  .boton-enviado { background: rgb(160,160,160) !important; cursor: default !important; }
+
+  /* ================= BOTONES EXTRA ================= */
+  .apartado-botones { width: 100%; display: flex; justify-content: center; padding: 20px; background: #ffffff; }
+  .botonfotos { padding: 12px 24px; background: #0e4571; color: white; text-decoration: none; border-radius: 30px; font-size: 1rem; }
+
+</style>
+</head>
+
+<body>
+
+<div id="portada-sobre">
+  <div class="sobre" onclick="abrirInvitacion()">
+    <div class="sobre-arriba">
+      <img src="img/sobre-arriba.webp" alt="Sobre arriba">
+      <img src="img/sello.webp" class="sello" alt="Sello">
+    </div>
+    <div class="sobre-abajo">
+      <img src="img/sobre-abajo.webp" alt="Sobre abajo">
+    </div>
+  </div>
+</div>
+
+<div id="contenido-invitacion">
+
+  <div class="hero">
+    <img src="img/EimyP copia.webp" alt="Fondo">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="img/Timeline 1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="contador-box">
+    <div class="contador">
+      <div class="bloque"><div class="numero" id="dias">0</div><div class="etiqueta">DÍAS</div></div>
+      <div class="separador">:</div>
+      <div class="bloque"><div class="numero" id="horas">00</div><div class="etiqueta">HORAS</div></div>
+      <div class="separador">:</div>
+      <div class="bloque"><div class="numero" id="minutos">00</div><div class="etiqueta">MIN</div></div>
+      <div class="separador">:</div>
+      <div class="bloque"><div class="numero" id="segundos">00</div><div class="etiqueta">SEG</div></div>
+    </div>
+  </div>
+
+  <div class="imagen-abajo"><img src="img/fecha b copia.webp" alt="Fecha"></div>
+  <div class="imagen-abajo seccion"><img src="xv/11 copia.webp" alt="Foto XV 1"></div>
+
+  <div class="seccion-musica">
+    <div class="musica-contenido">
+      <div class="cancion-nombre" id="songTitle">Cargando...</div>
+      <div class="barra" id="progressBar"><div class="progreso" id="progress"></div></div>
+      <div class="controles">
+        <img src="img/prev.webp" onclick="anterior()" alt="Prev">
+        <img src="img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
+        <img src="img/next.webp" onclick="siguiente()" alt="Next">
+      </div>
+      <audio id="audio"></audio>
+    </div>
+  </div>
+
+  <div class="imagen-abajo"><img src="img/padres,padrinosb copia.webp" alt="Padres"></div>
+  <div class="imagen-abajo"><img src="img/ceremonia copia 2.webp" alt="Ceremonia"></div>
+
+  <div class="mapa-contenedor mapa-alt">
+    <div class="info-evento">
+      <h2>Parroquia de Catedral</h2>
+      <p>⏰ 5:00 PM</p>
+      <p>📍 Blvr. Miguel Hidalgo S/N, Centro Norte, Hermosillo.</p>
+    </div>
+    <div class="mapa">
+        <div class="imagen-abajo"><img src="img/Catedral.webp" alt="Foto Catedral"></div>
+    </div>
+    <a class="boton-mapa" href="https://maps.app.goo.gl/TU_ENLACE_AQUI" target="_blank">📍 Ver en Google Maps</a>
+  </div>
+
+  <div class="imagen-abajo"><img src="img/fiesta copiajpg copia.webp" alt="Fiesta"></div>
+
+  <div class="mapa-contenedor">
+    <div class="info-evento">
+      <h2>Los Bagotes Campestre</h2>
+      <p>⏰ 8:00 PM</p>
+      <p>📍 Av. Cayucos, Av Gaspar Luken Escalante, Hermosillo.</p>
+    </div>
+    <div class="mapa">
+        <div class="imagen-abajo"><img src="img/bagotes.webp" alt="Foto Lugar"></div>
+    </div>
+    <a class="boton-mapa" href="https://maps.app.goo.gl/TU_ENLACE_AQUI" target="_blank">📍 Ver en Google Maps</a>
+  </div>
+
+  <div class="imagen-abajo seccion"><img src="xv/22 copia.webp" alt="Foto 2"></div>
+  <div class="imagen-abajo seccion"><img src="xv/22 copia2.webp" alt="Foto 3"></div>
+  <div class="imagen-abajo"><img src="img/itinerarioo copia.webp" alt="Itinerario"></div>
+  <div class="imagen-abajo"><img src="img/confirmar copia.webp" alt="Confirmar"></div>
+
+  <div class="rsvp-contenedor" id="rsvp-fondo-1">
+    <form id="rsvpForm1" class="rsvp-form" method="POST" target="hidden_iframe"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSeBCBfYdO2_9ijrphtdHubzs0e9FaJp3Pt9iqZ-jSU1fuiLpg/formResponse">
+      
+      <input type="text" name="entry.1342879825" placeholder="Nombre completo 1" required>
+      <input type="text" name="entry.1606484921" placeholder="Nombre completo 2">
+      <input type="number" name="entry.1352172742" placeholder="Número de teléfono (10 dígitos)" required>
+      
+      <button type="submit" id="rsvpBtn1">Confirmar asistencia</button>
+    </form>
+  </div>
+
+  <div class="imagen-abajo"><img src="img/Sin título-7 copia.webp" alt="Separador"></div>
+  <div class="imagen-abajo"><img src="img/fotos.webp" alt="Fotos titulo"></div>
+
+  <div class="apartado-botones">
+    <a class="botonfotos" href="https://photos.app.goo.gl/WorGPJVcnPQzoJQC7" target="_blank">Subir o ver fotos</a>
+  </div>
+
+  <div class="imagen-abajo seccion"><img src="xv/Gemini_Generated_Image_nizkkinizkkinizk copia.webp" alt="Foto IA 1"></div>
+  <div class="imagen-abajo"><img src="img/codigo copia.webp" alt="Código"></div>
+  <div class="imagen-abajo"><img src="img/sugerencia regalo copia.webp" alt="Regalo"></div>
+  <div class="imagen-abajo"><img src="img/RECUERDOS copia.webp" alt="Recuerdos"></div>
+
+  <div class="rsvp-contenedor fondo-blanco">
+    <form id="rsvpForm2" class="rsvp-form" method="POST" target="hidden_iframe"
+      action="https://docs.google.com/forms/d/e/1FAIpQLScJJS9o2SMd0POjyxB8dLSIgowMMLCVD9j1p7rJZDXgW-e9RQ/formResponse">
+      
+      <input type="text" name="entry.539230503" placeholder="Nombre" required>
+      <input type="text" name="entry.1906267922" placeholder="Mensaje" required>
+      
+      <button type="submit" id="rsvpBtn2">Enviar</button>
+    </form>
+  </div>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+  <div class="imagen-abajo seccion"><img src="xv/Gemini_Generated_Image_wwfx73wwfx73wwfx copia.webp" alt="Foto Final"></div>
+  <div class="imagen-abajo"><img src="img/final copia.webp" alt="Footer"></div>
+
+</div>
+
+<script>
+  // 1. SCROLL LOCK INICIAL
+  document.body.style.overflow = "hidden";
+
+  // 2. ABRIR SOBRE
+  function abrirInvitacion() {
+    const portada = document.getElementById("portada-sobre");
+    const contenido = document.getElementById("contenido-invitacion");
+    portada.classList.add("abierto");
+    setTimeout(() => {
+      portada.classList.add("oculto");
+      contenido.style.display = "block";
+      document.body.style.overflow = "auto"; 
+      // Si quieres que la música empiece sola al abrir, descomenta abajo:
+      // playPause();
+    }, 1000);
+  }
+
+  // 3. CONTADOR
+  const fechaEvento = new Date("2026-03-15T18:00:00");
+  function actualizarContador() {
+    const ahora = new Date();
+    const diferencia = fechaEvento - ahora;
+    if (diferencia <= 0) return;
+    
+    document.getElementById("dias").textContent = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    document.getElementById("horas").textContent = Math.floor((diferencia / (1000 * 60 * 60)) % 24).toString().padStart(2, "0");
+    document.getElementById("minutos").textContent = Math.floor((diferencia / (1000 * 60)) % 60).toString().padStart(2, "0");
+    document.getElementById("segundos").textContent = Math.floor((diferencia / 1000) % 60).toString().padStart(2, "0");
+  }
+  setInterval(actualizarContador, 1000);
+  actualizarContador();
+
+  // 4. MÚSICA
+  const canciones = [
+    { nombre: "Dynamite", src: "music/Dynamite1.mp3" },
+    { nombre: "Butter", src: "music/Butter1.mp3" },
+    { nombre: "Permission to Dance", src: "music/Permission.mp3" }
+  ];
+  let indice = 0;
+  const audio = document.getElementById("audio");
+  const playBtn = document.getElementById("playBtn");
+  const progress = document.getElementById("progress");
+
+  function cargarCancion() {
+    audio.src = canciones[indice].src;
+    document.getElementById("songTitle").textContent = canciones[indice].nombre;
+  }
+  function playPause() {
+    audio.paused ? audio.play() : audio.pause();
+  }
+  function siguiente() {
+    indice = (indice + 1) % canciones.length;
+    cargarCancion();
+    audio.play();
+  }
+  function anterior() {
+    indice = (indice - 1 + canciones.length) % canciones.length;
+    cargarCancion();
+    audio.play();
+  }
+  
+  audio.addEventListener("play", () => playBtn.src = "img/pause.webp");
+  audio.addEventListener("pause", () => playBtn.src = "img/play.webp");
+  audio.addEventListener("ended", siguiente);
+  audio.addEventListener("timeupdate", () => {
+    if(audio.duration) progress.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+  });
+  document.getElementById("progressBar").addEventListener("click", e => {
+    audio.currentTime = (e.offsetX / e.currentTarget.clientWidth) * audio.duration;
+  });
+  cargarCancion();
+
+  // 5. FORMULARIOS
+  function activarFormulario(formId, btnId, modo) {
+    const form = document.getElementById(formId);
+    const btn = document.getElementById(btnId);
+    if (!form || !btn) return;
+    const textoOriginal = btn.textContent;
+
+    form.addEventListener("submit", () => {
+      setTimeout(() => form.reset(), 10);
+      setTimeout(() => {
+        btn.textContent = "Enviado";
+        btn.classList.add("boton-enviado");
+        if (modo === "bloquear") btn.disabled = true;
+        if (modo === "resetear") {
+          setTimeout(() => {
+            btn.textContent = textoOriginal;
+            btn.classList.remove("boton-enviado");
+            btn.disabled = false;
+          }, 2000);
+        }
+      }, 100);
+    });
+  }
+  activarFormulario("rsvpForm1", "rsvpBtn1", "bloquear");
+  activarFormulario("rsvpForm2", "rsvpBtn2", "resetear");
+
+  // 6. ANIMACIONES Y PROTECCIÓN
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("visible"));
+  }, { threshold: 0.2 });
+  document.querySelectorAll(".seccion").forEach(el => observer.observe(el));
+
+  document.addEventListener("contextmenu", event => event.preventDefault());
+</script>
+
+</body>
+</html>
