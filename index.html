@@ -16,16 +16,14 @@
     }
 
     /* Este es el contenedor que simula el celular */
-  .contenedor-principal {
-    width: 100%;           /* Añade esto */
-    max-width: 480px; 
-    margin: 0 auto;   
-    background-color: #ffffff;
-    min-height: 100vh; 
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    position: relative;
-    overflow-x: hidden;    /* Evita desbordamientos laterales */
-  }
+    .contenedor-principal {
+      max-width: 480px; /* Ancho máximo similar a un móvil */
+      margin: 0 auto;   /* Centrar en pantalla */
+      background-color: #ffffff; /* Fondo blanco del contenido */
+      min-height: 100vh; /* Que ocupe al menos toda la altura */
+      box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Sombra estética para PC */
+      position: relative;
+    }
     /* ------------------------------------------- */
 
     html {
@@ -60,23 +58,17 @@
       background-color: transparent;
     }
 
-.menu-flotante {
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: 100%;           /* Que ocupe el ancho disponible... */
-  max-width: 480px;      /* ...pero nunca más de 480px */
-  display: flex;
-  justify-content: center;
-  pointer-events: none;  /* Para que el clic pase a través de la zona invisible */
-}
 
-.menu-contenido {
-  pointer-events: auto;  /* Para que los botones sí funcionen */
-  /* El resto de tu código igual... */
-}
+    .menu-flotante {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      /* Aseguramos que el menú no sea más ancho que el contenedor simulado */
+      width: max-content; 
+      max-width: 90%;
+    }
 
     .menu-contenido {
       display: flex;
@@ -308,11 +300,6 @@
       user-select: none;
     }
 
-    img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
   </style>
   
 </head>
