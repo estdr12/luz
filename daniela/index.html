@@ -18,7 +18,6 @@
   button:focus, input:focus, a:focus { outline: none; box-shadow: none; }
   
   html, body {
-    display: flex;
     margin: 0; padding: 0; 
     width: 100%; height: 100%;
     font-family: Arial, sans-serif; 
@@ -28,7 +27,6 @@
   /* ================= CONTENEDOR TIPO CELULAR ================= */
   #contenido-invitacion {
     width: 100%;
-    max-width: 480px; /* 🔥 LÍMITE DE ANCHO FIJO (Tamaño iPhone Max) */
     margin: 0 auto;   /* Centra el bloque en la pantalla */
     background: #f0f2f5;
     min-height: 100vh;
@@ -43,7 +41,7 @@
     position: fixed; inset: 0; background: #f0f2f5; z-index: 9999;
     display: flex; justify-content: center; align-items: center;
   }
-  .sobre { position: relative; width: 100%; max-width: 480px; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Sombra elegante en PC */}
+  .sobre { position: relative; width: 100%; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Sombra elegante en PC */}
   .sobre img { width: 100%; display: block; pointer-events: none; }
   .sobre-arriba { position: absolute; top: -8%; left: 0; width: 100%; z-index: 2; transition: transform 3s ease, opacity 2s ease; }
   .sobre-abajo { position: relative; z-index: 1; transition: transform 3s ease; }
