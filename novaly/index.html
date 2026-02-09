@@ -10,6 +10,28 @@
 
 <style>
 
+.btn-img {
+  display: block;
+  width: 100vw;
+  text-decoration: none;
+
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-img img {
+  width: 100%;     /* ocupa todo el ancho */
+  height: auto;    /* el alto lo define la imagen */
+  display: block;  /* elimina espacios raros */
+}
+
+
+.btn-imagen:focus,
+.btn-imagen:active {
+  outline: none;
+}
+
 html {
   scrollbar-width: none; /* Firefox */
 }
@@ -1000,6 +1022,10 @@ html, body {
 <div class="imagen-abajo">
   <img src="img/final copia.webp" alt="Imagen inferior">
 </div>
+
+<a href="https://luzinvitaciones.com" class="btn-img">
+  <img src="img/lusinvitaciones.webp" alt="">
+</a>
 
 <!-- ======================= -->
 <!-- SCRIPT CONTADOR -->
