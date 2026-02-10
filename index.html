@@ -17,6 +17,7 @@
 
     /* Este es el contenedor que simula el celular */
     .contenedor-principal {
+      max-width: 480px; /* Ancho máximo similar a un móvil */
       margin: 0 auto;   /* Centrar en pantalla */
       background-color: #ffffff; /* Fondo blanco del contenido */
       min-height: 100vh; /* Que ocupe al menos toda la altura */
@@ -143,7 +144,7 @@
 
     .boton {
       display: inline-block;
-      padding: 8px 6%;
+      padding: 8px 20px;
 
       background-image: url("img/WhatsApp1.webp");
       background-size: cover;
@@ -163,6 +164,23 @@
       padding: 12px 10%;
 
       background-image: url("img/WhatsApp\ copia.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      color: transparent;
+      text-decoration: none;
+      border-radius: 30px;
+      
+
+      transition: filter 0.3s ease;
+    }
+
+        .botonface {
+      display: inline-block;
+      padding: 8px 20px;
+
+      background-image: url("img/Facebook.webp");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -325,9 +343,18 @@
   </div>
 
   <div class="apartado-botones">
-      <a 
+    <a 
       href="https://wa.me/+526621144950"
       class="boton"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Subir o ver fotos
+    </a>
+
+        <a 
+      href="https://www.facebook.com/profile.php?id=61587708992772"
+      class="botonface"
       target="_blank"
       rel="noopener noreferrer"
     >
