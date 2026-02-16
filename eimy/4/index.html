@@ -10,6 +10,260 @@
 
 <style>
 
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+
+/* 🔒 Quitar pulsación larga SOLO en botones de música */
+.controles img {
+  -webkit-touch-callout: none; /* iOS: quita menú */
+  -webkit-user-select: none;
+  user-select: none;
+
+  pointer-events: auto; /* sigue siendo clickeable */
+}
+
+
+/* ======================= */
+/* CAPA ANTI DESCARGA */
+/* ======================= */
+
+.apartado-botones {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;           /* espacio entre botones */
+  padding: 20px;       /* espacio interno */
+  box-sizing: border-box;
+  background-color: #ffffff; /* color de fondo del apartado */
+  border-radius: 16px;        /* opcional: esquinas redondeadas */
+}
+
+.botonfotos {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #5f2770;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 1rem;
+}
+
+/* ======================= */
+/* BLOQUEO SOLO DE IMÁGENES GRANDES */
+/* ======================= */
+.imagen-abajo img,
+.hero img,
+.hero video {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* responsive: en móviles se ponen uno debajo del otro */
+@media (max-width: 480px) {
+  .apartado-botones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boton-doble {
+    width: 80%;
+    max-width: none;
+  }
+}
+
+
+  /* ======================= */
+/* SECCIÓN MÚSICA */
+/* ======================= */
+.seccion-musica {
+  width: 100%;
+  background: #8798ac; /* morado */
+  padding: 25px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.musica-contenido {
+  width: 100%;
+  max-width: 520px;
+  padding: 0 20px;   /* 🔥 aquí controlas el margen real */
+  box-sizing: border-box;
+  text-align: center;
+
+  color: white;
+}
+
+
+/* Nombre canción */
+.cancion-nombre {
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+
+/* Barra */
+.barra {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.progreso {
+  height: 100%;
+  width: 0%;
+  background: #ffffff;
+}
+
+.controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px; /* un poco más compacto */
+}
+
+/* Prev y Next */
+.controles img:not(#playBtn) {
+  width: 25px;   /* 🔥 más chicos */
+}
+
+/* Play / Pause */
+#playBtn {
+  width: 45px;   /* 🔥 más grande */
+}
+
+/* efecto al tocar */
+.controles img:active {
+  transform: scale(0.965);
+}
+
+.controles img {
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+/*sobre*/
+
+.sello {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+
+  width: 110px !important;
+  height: auto !important;
+
+  animation: brilloSello 2s ease-in-out infinite;
+}
+
+.sello img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+
+@keyframes brilloSello {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+
+/* 🔥 Quitar ripple azul en Android */
+.sobre,
+.sobre * {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* 🔥 Evita selección y glow fantasma */
+.sobre {
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ======================= */
+/* SOBRE PORTADA */
+/* ======================= */
+#portada-sobre {
+  position: fixed;
+  inset: 0;
+  background: #e6e6e6;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sobre {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  cursor: pointer;
+}
+
+.sobre img {
+  width: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Parte superior */
+.sobre-arriba {
+  position: absolute;
+  top: -8%;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  transition: transform 3s ease, opacity 2s ease;
+}
+
+/* Parte inferior */
+.sobre-abajo {
+  position: relative;
+  z-index: 1;
+  transition: transform 3s ease;
+}
+
+/* Estado abierto */
+#portada-sobre.abierto .sobre-arriba {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+#portada-sobre.abierto .sobre-abajo {
+  transform: translateY(100%);
+}
+
+/* Ocultar portada */
+#portada-sobre.oculto {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+
 #rsvp-fondo-1 {
   background-image: url("../img/fondo\ papel\ copia.webp");
   background-size: cover;
@@ -424,6 +678,21 @@ html, body {
 
 <body>
 
+<div id="portada-sobre">
+  <div class="sobre" onclick="abrirInvitacion()">
+    <div class="sobre-arriba">
+      <img src="../img/sobre-arriba.webp" alt="Sobre arriba">
+      <img src="../img/sello.webp" class="sello" alt="Sello">
+
+    </div>
+    <div class="sobre-abajo">
+      <img src="../img/sobre-abajo.webp" alt="Sobre abajo">
+    </div>
+  </div>
+</div>
+
+<div id="contenido-invitacion" style="display:none;">
+
 <!-- ======================= -->
 <!-- HERO -->
 <!-- ======================= -->
@@ -472,6 +741,35 @@ html, body {
 
 <div class="imagen-abajo">
   <img src="../img/fecha b copia.webp" alt="Imagen inferior">
+</div>
+
+<!-- ======================= -->
+<!-- SECCIÓN MÚSICA -->
+<!-- ======================= -->
+<div class="seccion-musica">
+
+  <div class="musica-contenido">
+
+    <div class="cancion-nombre" id="songTitle">Canción</div>
+
+    <div class="barra" id="progressBar">
+      <div class="progreso" id="progress"></div>
+    </div>
+
+    <div class="controles">
+        <img src="../img/prev.webp" onclick="anterior()" alt="Prev">
+        <img src="../img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
+        <img src="../img/next.webp" onclick="siguiente()" alt="Next">
+    </div>
+
+    <audio id="audio"></audio>
+
+  </div>
+
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/lugares.webp" alt="Imagen inferior">
 </div>
 
 <!--<div class="imagen-abajo seccion">
@@ -594,7 +892,7 @@ html, body {
 <!-- ======================= -->
 
 <div class="imagen-abajo">
-  <img src="../img/confirmar2.webp" alt="Imagen inferior">
+  <img src="../img/confirmar4.webp" alt="Imagen inferior">
 </div>
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
@@ -620,7 +918,7 @@ html, body {
     placeholder="Nombre completo 2 (opcional)" 
   >
 
-  <!--<input
+  <input
     type="text" 
     name="entry.1215302517" 
     placeholder="Nombre completo 3 (opcional)" 
@@ -631,7 +929,7 @@ html, body {
     name="entry.1828106703" 
     placeholder="Nombre completo 4 (opcional)" 
   >
-    <input 
+    <!--<input 
     type="text" 
     name="entry.2094451984" 
     placeholder="Nombre completo 5 (opcional)"
@@ -800,6 +1098,108 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 document.querySelectorAll(".seccion").forEach(el => observer.observe(el));
+</script>
+
+</div>
+
+<script>
+document.body.style.overflow = "hidden";
+
+function abrirInvitacion() {
+  const portada = document.getElementById("portada-sobre");
+  const contenido = document.getElementById("contenido-invitacion");
+
+  portada.classList.add("abierto");
+
+  setTimeout(() => {
+    portada.classList.add("oculto");
+    contenido.style.display = "block";
+    document.body.style.overflow = "auto";
+  }, 1000);
+}
+</script>
+
+<script>
+const canciones = [
+  { nombre: "Potter Waltz", src: "../music/hp.mp3" }
+];
+
+let indice = 0;
+const audio = document.getElementById("audio");
+const progress = document.getElementById("progress");
+const songTitle = document.getElementById("songTitle");
+const playBtn = document.getElementById("playBtn");
+
+function cargarCancion() {
+  audio.src = canciones[indice].src;
+  songTitle.textContent = canciones[indice].nombre;
+}
+
+function playPause() {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+
+
+function siguiente() {
+  indice = (indice + 1) % canciones.length;
+  cargarCancion();
+  audio.play();
+}
+
+function anterior() {
+  indice = (indice - 1 + canciones.length) % canciones.length;
+  cargarCancion();
+  audio.play();
+}
+
+
+function actualizarBotonPlay() {
+  playBtn.src = "../img/play.webp";
+}
+
+function actualizarBotonPause() {
+  playBtn.src = "../img/pause.webp";
+}
+
+
+audio.addEventListener("timeupdate", () => {
+  if (!audio.duration) return;
+  const porcentaje = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = porcentaje + "%";
+});
+
+document.getElementById("progressBar").addEventListener("click", e => {
+  const ancho = e.currentTarget.clientWidth;
+  audio.currentTime = (e.offsetX / ancho) * audio.duration;
+});
+
+audio.addEventListener("play", actualizarBotonPause);
+audio.addEventListener("pause", actualizarBotonPlay);
+audio.addEventListener("ended", siguiente);
+
+cargarCancion();
+</script>
+
+<script>
+document.addEventListener("touchstart", e => {
+  if (e.touches.length > 1) return; // no multitouch
+
+  const target = e.target;
+
+  if (
+    target.closest(".imagen-abajo img") ||
+    target.closest(".hero img") ||
+    target.closest(".hero video")
+  ) {
+    // NO uses preventDefault aquí
+    target.style.webkitTouchCallout = "none";
+  }
+});
+
 </script>
 
 </body>

@@ -757,7 +757,9 @@ html, body {
     </div>
 
     <div class="controles">
-      <img src="../img/play.webp" alt="Play" id="playBtn" onclick="playPause()">
+        <img src="../img/prev.webp" onclick="anterior()" alt="Prev">
+        <img src="../img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
+        <img src="../img/next.webp" onclick="siguiente()" alt="Next">
     </div>
 
     <audio id="audio"></audio>
@@ -1119,7 +1121,7 @@ function abrirInvitacion() {
 
 <script>
 const canciones = [
-  { nombre: "Harry Potter and the Goblet of Fire", src: "../music/hp.mp3" }
+  { nombre: "Potter Waltz", src: "../music/hp.mp3" }
 ];
 
 let indice = 0;
