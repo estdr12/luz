@@ -113,7 +113,7 @@ fetch(url)
       const texto = e.target.value.toLowerCase().trim();
 
       const filtrados = todasLasRespuestas.filter(r =>
-        (r["Nombre"] || "").toLowerCase().includes(texto)
+        (r["Mensaje"] || "").toLowerCase().includes(texto)
       );
 
       renderizar(filtrados);
@@ -128,10 +128,10 @@ function renderizar(lista) {
 contenedor.innerHTML += `
   <div class="card">
     <p style="font-size:1.05rem; line-height:1.4; margin-top:0;">
-      ${resp["Mensaje"] || ""}
+      ${resp["Nombre"] || ""}
     </p>
     <div style="margin-top:10px; text-align:right; font-style:italic; color:#555;">
-      — ${resp["Nombre"] || ""}
+      — ${resp["Mensaje"] || ""}
     </div>
   </div>
 `;
