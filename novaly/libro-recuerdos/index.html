@@ -1,804 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen Matemáticas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --secondary: #ec4899;
-            --success: #22c55e;
-            --danger: #ef4444;
-            --bg: #e2e8f0; 
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-        }
+<meta charset="UTF-8">
+<title>Invitados XV Eimy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            margin: 0;
-            padding: 30px 15px;
-            min-height: 100vh;
-        }
+<style>
+* { box-sizing: border-box; }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 30px 15px;
-            border-radius: 24px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
-        }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: rgb(255, 255, 255);
+  min-height: 100vh;
+  color: #333;
+}
 
-        h1 {
-            text-align: center;
-            font-weight: 800;
-            font-size: 2.5em;
-            margin-top: 0;
-            margin-bottom: 5px;
-            color: #1e293b;
-        }
+h1 {
+  text-align: center;
+  padding: 20px 10px;
+  margin: 0;
+}
 
-        .subtitle { text-align: center; color: #64748b; font-weight: 600; margin-bottom: 40px; }
+#contenedor {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-        /* Tarjetas de Preguntas */
-        .question-block {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            border-left: 6px solid var(--primary);
-        }
+.card {
+  background: white;
+  background-image: url("img/Fondo\ tarjeta.webp");
+  background-size: cover;
+  border-radius: 16px;
+  padding: 10px 14px; /* 👈 menos espacio arriba */
+  animation: aparecer 0.4s ease;
+}
 
-        .question-text {
-            font-weight: 800;
-            font-size: 1.25em;
-            color: #334155;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-        }
 
-        .figure-container {
-            text-align: center;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f8fafc;
-            background: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
-            background-size: 20px 20px;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            max-width: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        .figure-container svg {
-            width: 100%;
-            height: auto;
-            max-height: 200px;
-        }
+.label {
+  font-weight: 600;
+  color: #444;
+}
 
-        .input-group { margin-bottom: 20px; }
-        .input-group label { font-weight: 600; display: block; margin-bottom: 8px; color: #475569; }
+input {
+  width: min(90%, 400px);
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
 
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #cbd5e1;
-            border-radius: 12px;
-            font-size: 16px;
-            font-family: inherit;
-            box-sizing: border-box;
-            background-color: #f8fafc;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: white;
-        }
-
-        /* Botones y Pistas */
-        .btn {
-            padding: 18px 32px;
-            border: none;
-            border-radius: 14px;
-            font-weight: 800;
-            font-family: inherit;
-            cursor: pointer;
-            font-size: 1.2em;
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        #submitBtn {
-            background: var(--primary);
-            color: white;
-        }
-
-        #reloadBtn {
-            background: #475569;
-            color: white;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .hint-btn {
-            background: none;
-            border: none;
-            color: #64748b;
-            font-size: 0.9em;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            padding: 0;
-            font-family: inherit;
-            display: inline-flex;
-            align-items: center;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .hint-box {
-            display: none;
-            background: #eef2ff;
-            color: #3730a3;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 0.95em;
-            margin-top: 15px;
-            border-left: 4px solid var(--primary);
-            line-height: 1.5;
-        }
-
-        /* Gráficas */
-        .chart-layout {
-            position: relative;
-            margin: 30px auto 50px auto; 
-            width: 80%;
-            max-width: 350px;
-            height: 160px; 
-            border-left: 2px solid #94a3b8; 
-            border-bottom: 2px solid #94a3b8; 
-            background-color: #f8fafc;
-        }
-
-        .grid-line {
-            position: absolute;
-            left: 0;
-            right: 0;
-            border-bottom: 1px dashed #cbd5e1;
-            z-index: 1;
-        }
-
-        .y-label {
-            position: absolute;
-            left: -35px;
-            top: -8px;
-            font-size: 13px;
-            font-weight: 800;
-            color: #64748b;
-            width: 25px;
-            text-align: right;
-        }
-
-        .bars-container {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            z-index: 2; 
-        }
-
-        .bar-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            width: 40px;
-            height: 100%;
-        }
-
-        .bar {
-            width: 100%;
-            background: var(--primary);
-            border-radius: 4px 4px 0 0;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
-        }
-
-        .bar-label {
-            position: absolute;
-            bottom: -30px;
-            font-weight: 800;
-            color: #475569;
-        }
-        /* Feedback y Modal */
-        .feedback {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 0.95em;
-            background: #f1f5f9;
-        }
-        
-        .feedback-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2e8f0; }
-        .feedback-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .res-correct { color: var(--success); font-weight: 800; }
-        .res-incorrect { color: var(--danger); font-weight: 800; }
-        .res-detail { color: #64748b; font-style: italic; margin-left: 5px; display: block; margin-top: 5px;}
-
-        /* Animaciones Modal */
-        @keyframes modalPop {
-            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 400px;
-            width: 70%;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-score {
-            font-size: 80px;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1;
-            margin: 20px 0;
-        }
-        .modal-score span { font-size: 30px; color: #94a3b8; }
-    </style>
+    background: #e1e1e1;
+  color: rgb(0, 0, 0);
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Prueba de Examen📄</h1>
-    <p class="subtitle">Las preguntas son generadas aleatoriamente. Usa lápiz y papel para practicar procedimiento.</p>
-
-    <div id="quizContainer"></div>
-
-    <button id="submitBtn" class="btn" onclick="checkAnswers()">Calificar Examen</button>
-    <button id="reloadBtn" class="btn" onclick="generateNewExam()">Generar Nuevo Examen</button>
+<div style="
+  display: flex;
+  justify-content: center; /* centra horizontal */
+  overflow: hidden;        /* evita scroll horizontal */
+">
+  <img 
+    src="img/Paginarecuerdos copia.webp"
+    alt="Invitados XV Eimy"
+    style="
+      height: 250px;     /* mantiene proporciones */
+      display: block;
+    "
+  >
 </div>
 
-<div id="resultModal" class="modal-overlay">
-<div class="modal-content">
-    <h2 style="margin-top: 0; color: #1e293b;">¡Examen Terminado!</h2>
-    <div class="modal-score" id="scoreGrade">0</div> 
-    <div id="scoreCounts" style="color: #94a3b8; font-weight: 600; margin-bottom: 20px;">0 / 0 aciertos</div>
-    <button class="btn" style="background: var(--primary); color: white;" onclick="closeModal()">Revisar mis respuestas</button>
+
+
+
+
+<div style="text-align:center; padding: 5px;">
+  <input id="buscador" placeholder="🔍 Buscar nombre...">
 </div>
-</div>
+
+<div id="contenedor"></div>
 
 <script>
-    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-    window.scrollTo(0, 0);
-
-    // --- Utilidades ---
-    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-    function randChoice(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-    function clean(str) { return String(str).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, ''); }
-    
-    // Nueva función para normalizar expresiones algebraicas sin importar el orden
-    function normalizeAlgebra(str) {
-        if (!str) return "";
-        // Quitamos espacios, asteriscos (por si los usan para multiplicar) y normalizamos ^2 a 2
-        str = String(str).toLowerCase().replace(/[\s\*]/g, '').replace(/\^2/g, '2');
-        
-        let terms = str.split('+');
-        
-        terms = terms.map(term => {
-            // Separar coeficientes numéricos de letras
-            let match = term.match(/^(\d*)(.*)$/);
-            if (match) {
-                let coeff = match[1];
-                let vars = match[2];
-                
-                // Ordenar las variables alfabéticamente dentro del término (ej. ba -> ab)
-                let varParts = vars.match(/[a-z]\d*/g);
-                if (varParts) {
-                    vars = varParts.sort().join('');
-                }
-                return coeff + vars;
-            }
-            return term;
-        });
-        
-        // Ordenar todos los términos para que no importe el orden de la suma
-        return terms.sort().join('+');
-    }
-
-    let answers = {}; 
-    const container = document.getElementById('quizContainer');
-    let globalQuestionCount = 0;
-
-    function wrapQuestion(title, html, hint) {
-        globalQuestionCount++;
-        const hintId = `hint_${globalQuestionCount}`;
-        return `
-        <div class="question-block">
-            <div class="question-text">${title}</div>
-            ${html}
-            <button class="hint-btn" onclick="toggleHint('${hintId}')">💡 ¿No sabes cómo resolverlo? Ver pista</button>
-            <div id="${hintId}" class="hint-box">${hint}</div>
-        </div>`;
-    }
-
-    function toggleHint(id) {
-        const hintBox = document.getElementById(id);
-        hintBox.style.display = hintBox.style.display === 'block' ? 'none' : 'block';
-    }
-
-    // ==========================================
-    // SECCIÓN 1: Generadores de Preguntas
-    // ==========================================
-
-function generateAlgebra(index) {
-        const vars = ['a', 'b', 'x', 'y', 'm', 'n'];
-        const v1 = randChoice(vars);
-        const v2 = randChoice(vars.filter(v => v !== v1));
-        
-        const shapes = ['rect', 'square', 'triangle'];
-        const shape = randChoice(shapes);
-        const isMultiVar = Math.random() > 0.5;
-
-        let svgHTML, shapeName, hintText, rawPerimeter, rawArea;
-        const id_p = `q1_${index}_p`; const id_a = `q1_${index}_a`;
-
-        if (shape === 'rect') {
-            shapeName = "Rectángulo";
-            const n1 = randInt(2, 6); const n2 = randInt(2, 9); const n3 = randInt(2, 6);
-            
-            if (isMultiVar) {
-                let [varA, varB] = [v1, v2].sort();
-                const sideA = `${n1}${varA} + ${n2}`; 
-                const sideB = `${n3}${varB}`;
-                
-                rawPerimeter = `${2*n1}${varA} + ${2*n3}${varB} + ${2*n2}`;
-                rawArea = `${n1*n3}${varA}${varB} + ${n2*n3}${varB}`;
-
-                svgHTML = `<svg viewBox="0 0 300 160">
-                               <rect x="40" y="20" width="220" height="110" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="3"/>
-                               <text x="150" y="155" text-anchor="middle" font-size="20" font-weight="bold">${sideA}</text>
-                               <text x="-75" y="30" transform="rotate(-90)" text-anchor="middle" font-size="20" font-weight="bold">${sideB}</text>
-                           </svg>`;
-            } else {
-                const sideA = `${n1}${v1} + ${n2}`; const sideB = `${n3}${v1}`;
-                rawPerimeter = `${2*(n1+n3)}${v1} + ${2*n2}`;
-                rawArea = `${n1*n3}${v1}^2 + ${n2*n3}${v1}`;
-                
-                svgHTML = `<svg viewBox="0 0 300 160">
-                               <rect x="40" y="20" width="220" height="110" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="3"/>
-                               <text x="150" y="155" text-anchor="middle" font-size="20" font-weight="bold">${sideA}</text>
-                               <text x="-75" y="30" transform="rotate(-90)" text-anchor="middle" font-size="20" font-weight="bold">${sideB}</text>
-                           </svg>`;
-            }
-            hintText = "Para el perímetro, suma todos los lados (dos bases y dos alturas). Para el área, multiplica la base por la altura usando propiedad distributiva.";
-
-        } else if (shape === 'square') {
-            shapeName = "Cuadrado";
-            const n1 = randInt(3, 9);
-            const isBinomial = Math.random() > 0.5; 
-            let sideStr;
-
-            if (isBinomial) {
-                const n2 = randInt(2, 9);
-                sideStr = `${n1}${v1} + ${n2}`;
-                rawPerimeter = `${4*n1}${v1} + ${4*n2}`;
-                rawArea = `${n1*n1}${v1}^2 + ${2*n1*n2}${v1} + ${n2*n2}`;
-            } else {
-                sideStr = `${n1}${v1}`;
-                rawPerimeter = `${4*n1}${v1}`;
-                rawArea = `${n1*n1}${v1}^2`;
-            }
-
-            svgHTML = `<svg viewBox="0 0 200 180">
-                           <rect x="40" y="20" width="120" height="120" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="3"/>
-                           <text x="100" y="165" text-anchor="middle" font-size="16" font-weight="bold">${sideStr}</text>
-                       </svg>`;
-            hintText = "Para el perímetro, suma los 4 lados (o multiplica la expresión del lado x 4). Para el área, eleva la medida del lado al cuadrado (si es un binomio, multiplica el binomio por sí mismo).";
-
-        } else {
-            shapeName = "Triángulo Rectángulo";
-            
-            if (isMultiVar) {
-                const bNum = randInt(2, 5); const hNum = randInt(2, 5); const hypNum = randInt(4, 8);
-                let [varA, varB] = [v1, v2].sort();
-                
-                const bStr = `${bNum}${varA}`;
-                const hStr = `${hNum}${varB}`;
-                const hypStr = `${hypNum}`; 
-                
-                rawPerimeter = `${bNum}${varA} + ${hNum}${varB} + ${hypNum}`;
-                let areaNum = (bNum * hNum) / 2;
-                rawArea = `${areaNum}${varA}${varB}`;
-
-                svgHTML = `<svg viewBox="0 0 320 220">
-                               <polygon points="70,170 250,170 70,30" fill="#dcfce7" stroke="#22c55e" stroke-width="3"/>
-                               <text x="160" y="195" text-anchor="middle" font-size="22" font-weight="bold">${bStr}</text>
-                               <text x="60" y="100" text-anchor="end" font-size="22" font-weight="bold">${hStr}</text>
-                               <text x="175" y="90" text-anchor="middle" font-size="22" font-weight="bold">${hypStr}</text>
-                           </svg>`;
-            } else {
-                const m = randInt(2, 5);
-                const b = 3*m; const h = 4*m; const hyp = 5*m; 
-                const bStr = `${b}${v1}`; const hStr = `${h}${v1}`; const hypStr = `${hyp}${v1}`;
-                
-                rawPerimeter = `${b+h+hyp}${v1}`;
-                rawArea = `${(b*h)/2}${v1}^2`;
-
-                svgHTML = `<svg viewBox="0 0 320 220">
-                               <polygon points="70,170 250,170 70,30" fill="#dcfce7" stroke="#22c55e" stroke-width="3"/>
-                               <text x="160" y="195" text-anchor="middle" font-size="22" font-weight="bold">${bStr}</text>
-                               <text x="60" y="100" text-anchor="end" font-size="22" font-weight="bold">${hStr}</text>
-                               <text x="175" y="90" text-anchor="middle" font-size="22" font-weight="bold">${hypStr}</text>
-                           </svg>`;
-            }
-            hintText = "Para el perímetro, suma los 3 lados. Para el área, multiplica la base por la altura (aplica propiedad distributiva) y divide el resultado final entre 2.";
-        }
-
-        answers[id_p] = { type: 'algebra', val: rawPerimeter, raw: rawPerimeter };
-        answers[id_a] = { type: 'algebra', val: rawArea, raw: rawArea };
-
-        return wrapQuestion(`1.${index} Geometría: ${shapeName}`, `
-            <div class="figure-container">${svgHTML}</div>
-            <div class="input-group"><label>Perímetro (puedes sumar en cualquier orden):</label><input type="text" id="${id_p}" placeholder="Ej. 4a + 6b + 8"></div>
-            <div class="input-group"><label>Área (usa ^2 para cuadrados, o solo 2):</label><input type="text" id="${id_a}" placeholder="Ej. 15ab"></div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    function generateInverseProp(index) {
-        const constant = randChoice([120, 180, 240, 300, 360]); 
-        let divisors = [];
-        for(let i=2; i<=30; i++) if(constant % i === 0) divisors.push(i);
-        const val1 = randChoice(divisors); const res1 = constant / val1;
-        let val2 = randChoice(divisors.filter(d => d !== val1)); const res2 = constant / val2;
-
-        const scenarios = [
-            { txt: "pintores pintan una casa", u1: "pintores", u2: "horas" },
-            { txt: "obreros construyen un muro", u1: "obreros", u2: "días" },
-            { txt: "grifos llenan una piscina", u1: "grifos", u2: "horas" }
-        ];
-        const sc = randChoice(scenarios);
-        const id = `q2_${index}`;
-        answers[id] = { type: 'number', val: res2 };
-
-        const hintText = `En proporcionalidad inversa, si aumentas los ${sc.u1}, el tiempo disminuye. Multiplica los valores iniciales (${val1} × ${res1} = ${constant}) y divide ese total entre el nuevo número de ${sc.u1} (${val2}).`;
-
-        return wrapQuestion(`2.${index} Proporcionalidad Inversa`, `
-            <p style="font-size:1.1em; color:#475569;">Si <b>${val1} ${sc.u1}</b> tardan <b>${res1} ${sc.u2}</b> en completar un trabajo.</p>
-            <div class="input-group">
-                <label>¿Cuánto tardarán ${val2} ${sc.u1}? (${sc.u2})</label>
-                <input type="number" id="${id}" placeholder="Escribe solo el número">
-            </div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    function generateAngles(index) {
-        const sides = randInt(3, 10);
-        const names = {3:"Triángulo", 4:"Cuadrilátero", 5:"Pentágono", 6:"Hexágono", 7:"Heptágono", 8:"Octágono", 9:"Eneágono", 10:"Decágono"};
-        const sum = 180 * (sides - 2);
-        const oneAngle = parseFloat((sum / sides).toFixed(2));
-        const id_sum = `q3_${index}_sum`; const id_one = `q3_${index}_one`;
-
-        let points = ""; const r = 60;
-        for (let i = 0; i < sides; i++) {
-            let a = (i * 2 * Math.PI / sides) - Math.PI/2;
-            points += `${100 + r * Math.cos(a)},${80 + r * Math.sin(a)} `;
-        }
-
-        answers[id_sum] = { type: 'number', val: sum };
-        answers[id_one] = { type: 'number', val: oneAngle, tolerance: 0.5 };
-
-        const hintText = `Para la suma de todos los ángulos usa la fórmula: <b>180 × (n - 2)</b>, donde 'n' es el número de lados. Como es un ${names[sides]}, tiene ${sides} lados. <br>Para encontrar cuánto mide un solo ángulo, divide la suma total entre el número de lados (${sides}).`;
-
-        return wrapQuestion(`3.${index} Ángulos de un ${names[sides]} Regular`, `
-            <div class="figure-container"><svg viewBox="0 0 200 160"><polygon points="${points}" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="3"/></svg></div>
-            <div class="input-group"><label>1. Suma de todos sus ángulos interiores:</label><input type="number" id="${id_sum}"></div>
-            <div class="input-group"><label>2. Medida de un solo ángulo (2 decimales):</label><input type="number" id="${id_one}" step="0.01"></div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    function generatePolyId(index) {
-        const sides = randInt(3, 8);
-        const isReg = Math.random() > 0.5;
-        const names = {3:"Triángulo", 4:"Cuadrilátero", 5:"Pentágono", 6:"Hexágono", 7:"Heptágono", 8:"Octágono"};
-        
-        let points = ""; const r = 65;
-        for (let i = 0; i < sides; i++) {
-            let a = (i * 2 * Math.PI / sides) - Math.PI/2;
-            let currentR = isReg ? r : r + randInt(-30, 30); 
-            points += `${100 + currentR * Math.cos(a)},${90 + currentR * Math.sin(a)} `;
-        }
-
-        const id_name = `q4_${index}_name`; const id_type = `q4_${index}_type`;
-        answers[id_name] = { type: 'text', val: names[sides] }; 
-        answers[id_type] = { type: 'text', val: isReg ? "Regular" : "Irregular" };
-
-        const hintText = `Cuenta los lados que tiene la figura para saber su nombre (3=Triángulo, 4=Cuadrilátero, 5=Pentágono, etc.).<br>Si todos los lados y ángulos se ven perfectamente iguales y la figura es simétrica, es un polígono <b>Regular</b>. Si se ve deforme o con lados de distintos tamaños, es <b>Irregular</b>.`;
-
-        return wrapQuestion(`4.${index} Identificación de Polígonos`, `
-            <div class="figure-container"><svg viewBox="0 0 200 180"><polygon points="${points}" fill="#fef08a" stroke="#eab308" stroke-width="3"/></svg></div>
-            <div class="input-group"><label>Nombre según sus lados (ej. Pentágono):</label><input type="text" id="${id_name}"></div>
-            <div class="input-group">
-                <label>¿Es regular o irregular?</label>
-                <select id="${id_type}"><option value="">-- Selecciona --</option><option value="Regular">Regular</option><option value="Irregular">Irregular</option></select>
-            </div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    function generateStats(index) {
-        const len = randInt(5, 8);
-        let data = []; 
-        for(let i=0; i<len; i++) data.push(randInt(1, 9));
-        data.sort((a,b) => a - b);
-        
-        const sum = data.reduce((a,b) => a + b, 0);
-        const mean = parseFloat((sum / len).toFixed(2));
-        let median = (len % 2 === 0) ? (data[len/2 - 1] + data[len/2]) / 2 : data[Math.floor(len/2)];
-
-        let counts = {}, maxFreq = 0;
-        data.forEach(x => { 
-            counts[x] = (counts[x] || 0) + 1; 
-            if(counts[x] > maxFreq) maxFreq = counts[x]; 
-        });
-        
-        let modes = Object.keys(counts).filter(k => counts[k] === maxFreq);
-        
-        const id_mean = `q5_${index}_mean`; const id_med = `q5_${index}_med`; const id_mode = `q5_${index}_mode`;
-
-        answers[id_mean] = { type: 'number', val: mean, tolerance: 0.1 };
-        answers[id_med] = { type: 'number', val: median };
-        if (maxFreq === 1) {
-            answers[id_mode] = { type: 'text_includes', val: 'nohay', raw: 'No hay moda' };
-        } else {
-            answers[id_mode] = { type: 'mode_check', val: modes, raw: modes.join(', ') };
-        }
-
-        const hintText = `<b>Media:</b> Suma todos los números (${sum}) y divide el resultado entre la cantidad total de números que hay (${len}).<br><b>Mediana:</b> Los números ya están ordenados; busca el número que queda exactamente en el centro (si hay dos en el centro, súmalos y divide entre 2).<br><b>Moda:</b> Es el número que más veces se repite en la lista.`;
-
-        return wrapQuestion(`5.${index} Medidas de Tendencia Central`, `
-            <p style="text-align:center; font-size: 1.2em; background:#f1f5f9; padding:10px; border-radius:8px;">[ <b>${data.join(', ')}</b> ]</p>
-            <div class="input-group"><label>Media (Promedio):</label><input type="number" id="${id_mean}" step="0.01"></div>
-            <div class="input-group"><label>Mediana:</label><input type="number" id="${id_med}" step="0.5"></div>
-            <div class="input-group"><label>Moda (Si no hay escribe "No hay". Si hay más de una, sepáralas con coma):</label><input type="text" id="${id_mode}"></div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-function generateGraph(index) {
-        const cats = ['A', 'B', 'C', 'D'];
-        const vals = cats.map(() => randInt(1, 8) * 10); 
-        
-        let bars = "";
-        vals.forEach((v, i) => { 
-            bars += `
-            <div class="bar-wrapper">
-                <div class="bar" style="height:${v * 2}px"></div>
-                <div class="bar-label">${cats[i]}</div>
-            </div>`; 
-        });
-
-        let gridHTML = "";
-        for (let i = 20; i <= 80; i += 20) {
-            gridHTML += `<div class="grid-line" style="bottom: ${i * 2}px;"><span class="y-label">${i}</span></div>`;
-        }
-        gridHTML += `<div class="grid-line" style="bottom: 0px;"><span class="y-label">0</span></div>`;
-
-        const idx1 = randInt(0, 3); const idx2 = (idx1 + 1) % 4;
-        const id_1 = `q6_${index}_1`; const id_2 = `q6_${index}_2`;
-        answers[id_1] = { type: 'number', val: vals[idx1] + vals[idx2] };
-        answers[id_2] = { type: 'number', val: Math.abs(vals[idx1] - vals[idx2]) };
-
-        const hintText = `Apóyate en la cuadrícula y los números de la izquierda para saber la altura (valor) de las barras <b>${cats[idx1]}</b> y <b>${cats[idx2]}</b>. <br>1. Súmalos para encontrar el total.<br>2. Resta el número menor al mayor para encontrar la diferencia.`;
-
-        return wrapQuestion(`6.${index} Lectura de Gráficas`, `
-            <div class="chart-layout">
-                ${gridHTML}
-                <div class="bars-container">
-                    ${bars}
-                </div>
-            </div>
-            <div class="input-group"><label>1. Suma de ${cats[idx1]} y ${cats[idx2]}:</label><input type="number" id="${id_1}"></div>
-            <div class="input-group"><label>2. Diferencia entre ${cats[idx1]} y ${cats[idx2]}:</label><input type="number" id="${id_2}"></div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    function generatePerc(index) {
-        const easyP = randChoice([10, 25, 50]); const easyBase = randInt(2, 20) * 10;
-        const hardP = randInt(3, 97); const hardBase = randInt(50, 500);
-        
-        const id_1 = `q7_${index}_1`; const id_2 = `q7_${index}_2`;
-        answers[id_1] = { type: 'number', val: (easyP/100) * easyBase };
-        answers[id_2] = { type: 'number', val: parseFloat(((hardP/100)*hardBase).toFixed(2)), tolerance: 0.1 };
-
-        const hintText = `La forma más directa de calcular un porcentaje es multiplicar el número base por el porcentaje y dividir el resultado entre 100. <br><i>Ejemplo para la pregunta 1: Multiplica ${easyP} × ${easyBase} y divídelo entre 100.</i>`;
-
-        return wrapQuestion(`7.${index} Porcentajes`, `
-            <div class="input-group"><label>1. El ${easyP}% de ${easyBase} es:</label><input type="number" id="${id_1}"></div>
-            <div class="input-group"><label>2. El ${hardP}% de ${hardBase} es:</label><input type="number" id="${id_2}" step="0.01"></div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    function generateUnits(index, type) {
-        let unitsList, powers, title, numTitle, hintText;
-
-        if (type === 'meters') {
-            title = 'Longitud';
-            numTitle = 8;
-            unitsList = ['km', 'm', 'cm']; powers = [3, 0, -2]; 
-            hintText = `Orden: <b>km > m > cm</b>.<br>De <b>km a m</b> multiplica x1000. De <b>m a cm</b> multiplica x100. De <b>km a cm</b> multiplica x100,000. Si vas al revés (de pequeño a grande), divide.`;
-        } else if (type === 'liters') {
-            title = 'Capacidad';
-            numTitle = 9;
-            unitsList = ['kl', 'hl', 'dal', 'L', 'dl', 'cl', 'ml']; powers = [3, 2, 1, 0, -1, -2, -3]; 
-            hintText = `Orden: <b>${unitsList.join(' > ')}</b>.<br>De grande a pequeño multiplica (x10 por cada salto), de pequeño a grande divide (/10 por cada salto).`;
-        } else if (type === 'grams') {
-            title = 'Masa';
-            numTitle = 10;
-            unitsList = ['kg', 'g', 'mg']; powers = [3, 0, -3];
-            hintText = `Orden: <b>kg > g > mg</b>.<br>De <b>kg a g</b> multiplica x1000. De <b>g a mg</b> multiplica x1000. De <b>kg a mg</b> multiplica x1,000,000. Si vas al revés (de pequeño a grande), divide.`;
-        }
-
-        const maxIndex = unitsList.length - 1;
-        const u1 = randInt(0, maxIndex); 
-        let u2 = randInt(0, maxIndex); 
-        while(u1 === u2) u2 = randInt(0, maxIndex);
-        
-        const val = randInt(1, 9); 
-        const id = `q${numTitle}_${index}`;
-        
-        const diff = powers[u1] - powers[u2];
-        const resultVal = val * Math.pow(10, diff);
-        answers[id] = { type: 'number', val: resultVal, tolerance: 0.0001 };
-
-        return wrapQuestion(`${numTitle}.${index} Conversión de ${title}`, `
-            <div class="input-group">
-                <label>Convierte <b>${val} ${unitsList[u1]}</b> a <b>${unitsList[u2]}</b>:</label>
-                <input type="number" id="${id}" step="any">
-            </div>
-            <div class="feedback"></div>
-        `, hintText);
-    }
-
-    // ==========================================
-    // SECCIÓN 2: Construcción y Validación
-    // ==========================================
-
-    function buildQuiz() {
-        let h = "";
-        h += generateAlgebra(1) + generateAlgebra(2);
-        h += generateInverseProp(1) + generateInverseProp(2);
-        h += generateAngles(1) + generateAngles(2);
-        h += generatePolyId(1) + generatePolyId(2);
-        h += generateStats(1) + generateStats(2);
-        h += generateGraph(1) + generateGraph(2);
-        h += generatePerc(1); 
-        h += generateUnits(1, 'meters') + generateUnits(2, 'meters');
-        h += generateUnits(1, 'liters') + generateUnits(2, 'liters');
-        h += generateUnits(1, 'grams') + generateUnits(2, 'grams'); // Nueva sección de gramos
-        container.innerHTML = h;
-    }
-
-    function checkAnswers() {
-        let correct = 0, total = 0;
-
-        for (const [id, sol] of Object.entries(answers)) {
-            total++;
-            const input = document.getElementById(id);
-            if (!input) continue;
-
-            const userVal = input.value;
-            let isRight = false;
-
-            if (sol.type === 'number') {
-                const num = parseFloat(userVal);
-                if (!isNaN(num) && Math.abs(num - sol.val) <= (sol.tolerance || 0.000001)) isRight = true;
-            } else if (sol.type === 'text') {
-                if (clean(userVal) === clean(sol.val)) isRight = true;
-            } else if (sol.type === 'text_includes') {
-                if (clean(userVal).includes(clean(sol.val))) isRight = true;
-            } else if (sol.type === 'mode_check') {
-                let userArr = clean(userVal).split(',').filter(x => x);
-                let isMatch = userArr.length === sol.val.length && userArr.every(x => sol.val.includes(x));
-                if (isMatch) isRight = true;
-            } else if (sol.type === 'algebra') {
-                // Comprobamos usando la nueva función que ignora el orden
-                if (normalizeAlgebra(userVal) === normalizeAlgebra(sol.val)) isRight = true;
-            }
-
-            input.style.borderColor = isRight ? 'var(--success)' : 'var(--danger)';
-            input.style.backgroundColor = isRight ? '#f0fdf4' : '#fef2f2';
-            if(isRight) correct++;
-
-            const fbBlock = input.closest('.question-block').querySelector('.feedback');
-            fbBlock.style.display = 'block';
-
-            const labelText = input.previousElementSibling ? input.previousElementSibling.innerText : "Respuesta";
-            
-            if(!fbBlock.dataset.processed || fbBlock.dataset.processed !== "true") {
-                 fbBlock.insertAdjacentHTML('beforeend', `
-                    <div class="feedback-item">
-                        <span class="${isRight ? 'res-correct' : 'res-incorrect'}">${isRight ? '✓ Correcto' : '✗ Incorrecto'}</span> 
-                        <span style="font-size:0.9em; color:#64748b;">${labelText}</span>
-                        ${!isRight ? `<span class="res-detail">Respuesta correcta: ${sol.raw || sol.val}</span>` : ''}
-                    </div>
-                `);
-            }
-        }
-
-        document.querySelectorAll('.feedback').forEach(fb => fb.dataset.processed = "true");
-
-        // 1. Calculamos la calificación sobre 10
-        let grade = (correct / total) * 10;
-
-        // 2. Redondeamos a un decimal
-        let gradeFixed = grade.toFixed(1);
-
-        // 3. Insertamos los datos en el Modal
-        document.getElementById('scoreGrade').innerText = gradeFixed;
-        document.getElementById('scoreCounts').innerText = `${correct} / ${total} aciertos`;
-
-        // 4. Mostramos el modal y botones
-        document.getElementById('resultModal').style.display = 'flex';
-        document.getElementById('submitBtn').style.display = 'none';
-        document.getElementById('reloadBtn').style.display = 'block';
-
-        const gradeElem = document.getElementById('scoreGrade');
-        gradeElem.style.color = grade >= 6 ? 'var(--success)' : 'var(--danger)';
-    }
-
-    function closeModal() {
-        document.getElementById('resultModal').style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function generateNewExam() {
-        window.scrollTo(0, 0); 
-        location.reload();     
-    }
-
-    buildQuiz();
+const sheetID = "1aoS1DHHzcyfaHZQbGRHebk1TbyLUhSk_BS-CHAHb_Eo";
+const url = `https://opensheet.elk.sh/${sheetID}/Respuestas%20de%20formulario%201`;
+
+let todasLasRespuestas = [];
+
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    todasLasRespuestas = data.reverse();
+    renderizar(todasLasRespuestas);
+
+    document.getElementById("buscador").addEventListener("input", e => {
+      const texto = e.target.value.toLowerCase().trim();
+
+      const filtrados = todasLasRespuestas.filter(r =>
+        (r["Nombre"] || "").toLowerCase().includes(texto)
+      );
+
+      renderizar(filtrados);
+    });
+  });
+
+function renderizar(lista) {
+  const contenedor = document.getElementById("contenedor");
+  contenedor.innerHTML = "";
+
+  lista.forEach(resp => {
+contenedor.innerHTML += `
+  <div class="card">
+    <p style="font-size:1.05rem; line-height:1.4; margin-top:0;">
+      ${resp["Nombre"] || ""}
+    </p>
+    <div style="margin-top:10px; text-align:right; font-style:italic; color:#555;">
+      — ${resp["Mensaje"] || ""}
+    </div>
+  </div>
+`;
+
+  });
+}
 </script>
+
 </body>
 </html>
