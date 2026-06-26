@@ -6,7 +6,7 @@
 <!-- 🔒 Bloquea zoom en móvil -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>Novaly XV</title>
+<title>Vanessa XV</title>
 
 <style>
 
@@ -69,7 +69,7 @@ body::-webkit-scrollbar {
 .botonfotos {
   display: inline-block;
   padding: 12px 24px;
-  background: #0e4571;
+  background: #851448;
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -106,7 +106,7 @@ body::-webkit-scrollbar {
 /* ======================= */
 .seccion-musica {
   width: 100%;
-  background: #8798ac; /* morado */
+  background: #c01c65; /* morado */
   padding: 25px 0px;
   display: flex;
   justify-content: center;
@@ -284,7 +284,7 @@ body::-webkit-scrollbar {
 
 
 #rsvp-fondo-1 {
-  background-image: url("img/fondo\ papel\ copia.webp");
+  background-image: url("../img/fondo\ papel\ copia.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -384,7 +384,7 @@ a:focus {
 
   border: none;              /* 🔥 quita el borde */
   border-radius: 30px;       /* 🔥 esquinas redondas */
-  background: rgb(14, 69, 113);          /* 🔥 color del botón */
+  background: rgb(133, 20, 72);          /* 🔥 color del botón */
   color: white;              /* 🔥 color del texto */
 }
 
@@ -409,7 +409,7 @@ a:focus {
 
 .mapa-contenedor.mapa-alt {
   background: rgb(239, 238, 233);  /* 🔥 ESTE es el nuevo color */
-  background-image: url("img/mapa\ copia.webp");
+  background-image: url("../img/mapa\ copia.webp");
   background-size: 100%;
 }
 
@@ -446,7 +446,7 @@ html, body {
   padding: 60px 20px;
   box-sizing: border-box;
   background: #f2f2f2; /* o el color que tengas */
-  background-image: url("img/mapa1\ copia.webp");
+  background-image: url("../img/mapa1\ copia.webp");
   background-size: 100%;
 }
 
@@ -532,7 +532,7 @@ html, body {
 .boton-mapa {
   display: inline-block;
   padding: 12px 24px;
-  background: rgb(139, 155, 177);
+  background: #9f2966;
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -562,7 +562,7 @@ html, body {
   text-align: center;
   box-sizing: border-box;
 
-    background-image: url(img/tiempo1\ copia.webp);
+    background-image: url(../img/tiempo1\ copia.webp);
   background-size: 100% 100%;   /* 🔥 ESTIRA aunque se deforme */
   background-position: center;
   background-repeat: no-repeat;
@@ -595,7 +595,7 @@ html, body {
 .etiqueta {
   font-size: clamp(0.7rem, 1.5vw, 1rem);
   letter-spacing: 1px;
-  color: #666;
+  color: #aeaeae;
 }
 
 .separador {
@@ -617,7 +617,7 @@ html, body {
 /* Estado normal */
 .rsvp-form button {
   transition: background 0.8s ease, transform 0.2s ease;
-  background: rgb(14, 69, 113);
+  background: #851448;
 }
 
 
@@ -691,7 +691,6 @@ html, body {
   transform: translateY(0);
 }
 
-
 </style>
 </head>
 
@@ -700,12 +699,12 @@ html, body {
 <div id="portada-sobre">
   <div class="sobre" onclick="abrirInvitacion()">
     <div class="sobre-arriba">
-      <img src="img/sobre-arriba.webp" alt="Sobre arriba">
-      <img src="img/sello.webp" class="sello" alt="Sello">
+      <img src="../img/sobre-arriba.webp" alt="Sobre arriba">
+      <img src="../img/sello.webp" class="sello" alt="Sello">
 
     </div>
     <div class="sobre-abajo">
-      <img src="img/sobre-abajo.webp" alt="Sobre abajo">
+      <img src="../img/sobre-abajo.webp" alt="Sobre abajo">
     </div>
   </div>
 </div>
@@ -716,10 +715,10 @@ html, body {
 <!-- HERO -->
 <!-- ======================= -->
 <div class="hero">
-  <img src="img/EimyP copia.webp" alt="Fondo">
+  <img src="../img/foto.webp" alt="Fondo">
 
  <video autoplay muted loop playsinline>
-    <source src="img/Timeline 1.mp4" type="video/mp4">
+    <source src="../img/video.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -759,11 +758,11 @@ html, body {
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/fecha b copia.webp" alt="Imagen inferior">
+  <img src="../img/fecha b copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo seccion">
-  <img src="xv/11 copia.webp" alt="Imagen inferior">
+  <img src="../xv/11 copia.webp" alt="Imagen inferior">
 </div>
 
 <!-- ======================= -->
@@ -780,7 +779,9 @@ html, body {
     </div>
 
     <div class="controles">
-      <img src="img/play.webp" alt="Play" id="playBtn" onclick="playPause()">
+        <img src="../img/prev.webp" onclick="anterior()" alt="Prev">
+        <img src="../img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
+        <img src="../img/next.webp" onclick="siguiente()" alt="Next">
     </div>
 
     <audio id="audio"></audio>
@@ -790,17 +791,17 @@ html, body {
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/padres,padrinosb copia.webp" alt="Imagen inferior">
+  <img src="../img/padres,padrinosb copia.webp" alt="Imagen inferior">
 </div>
-
+<!--
 <div class="imagen-abajo">
-  <img src="img/ceremonia copia 2.webp" alt="Imagen inferior">
+  <img src="../img/ceremonia copia 2.webp" alt="Imagen inferior">
 </div>
-
+-->
 <!-- ======================= -->
 <!-- SECCIÓN MAPA -->
 <!-- ======================= -->
-
+<!--
 <div class="mapa-contenedor mapa-alt">
 
   <div class="info-evento">
@@ -811,7 +812,7 @@ html, body {
 
   <div class="mapa">
 <div class="imagen-abajo">
-  <img src="img/Catedral.webp" alt="Imagen inferior">
+  <img src="../img/Catedral.webp" alt="Imagen inferior">
 </div>
  </div>
 
@@ -820,7 +821,7 @@ html, body {
   </a>
 
 </div>
-
+-->
 <!--<div class="mapa-contenedor">
 
   <div class="info-evento">
@@ -840,24 +841,24 @@ html, body {
 </div>-->
 
 <div class="imagen-abajo">
-  <img src="img/fiesta copiajpg copia.webp" alt="Imagen inferior">
+  <img src="../img/fiesta copiajpg copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="mapa-contenedor">
 
   <div class="info-evento">
-    <h2>Jardín la Estanzuela</h2>
+    <h2>Salón de Eventos Las Torres</h2>
     <p>⏰ 9:00 PM</p>
-    <p>📍 Av. Nácori Grande 466, Carmen Serdán, 83115 Hermosillo, Son.</p>
+    <p>📍 Av. las Torres 556, Sonomex, 83138 Hermosillo, Son.</p>
   </div>
 
   <div class="mapa">
 <div class="imagen-abajo">
-  <img src="img/bagotes.webp" alt="Imagen inferior">
+  <img src="../img/bagotes.webp" alt="Imagen inferior">
 </div>
  </div>
 
-  <a class="boton-mapa" href="https://maps.app.goo.gl/WNZn3VWF4tKSVerV8" target="_blank">
+  <a class="boton-mapa" href="https://maps.app.goo.gl/2WLL68c1Xvdj1DNs8" target="_blank">
     📍 Ver en Google Maps
   </a>
 
@@ -882,22 +883,22 @@ html, body {
 </div>-->
 
 <div class="imagen-abajo seccion">
-  <img src="xv/22 copia.webp" alt="Imagen inferior">
+  <img src="../xv/22 copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo seccion">
-  <img src="xv/22 copia2.webp" alt="Imagen inferior">
+  <img src="../xv/22 copia2.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/itinerarioo copia.webp" alt="Imagen inferior">
+  <img src="../img/itinerarioo copia.webp" alt="Imagen inferior">
 </div>
 
 <!-- ======================= -->
 <!-- BOTÓN DE IMAGEN -->
 <!-- ======================= -->
 <!--<a href="https://wa.me/6623144535" class="boton-imagen">
-  <img src="img/Sin título-6.jpg" alt="Botón de imagen">
+  <img src="../img/Sin título-6.jpg" alt="Botón de imagen">
 </a>-->
 
 <!-- ======================= -->
@@ -905,29 +906,92 @@ html, body {
 <!-- ======================= -->
 
 <div class="imagen-abajo">
-  <img src="img/fotos.webp" alt="Imagen inferior">
+  <img src="../img/confirmar copia.webp" alt="Imagen inferior">
+</div>
+
+<div class="rsvp-contenedor" id="rsvp-fondo-1">
+
+<form 
+  id="rsvpForm1"
+  action="https://docs.google.com/forms/d/e/1FAIpQLSd5DjkH7dKEXBB_-b3AOj9oTxuEUy-wyGx0895lUJcHma2a1w/formResponse"
+  method="POST"
+  target="hidden_iframe"
+  class="rsvp-form"
+>
+
+  <input 
+    type="text" 
+    name="entry.929414078" 
+    placeholder="Nombre completo 1" 
+    required
+  >
+
+  <!--<input 
+    type="text" 
+    name="entry.452343354" 
+    placeholder="Nombre completo 2" 
+  >
+
+  <input
+    type="text" 
+    name="entry.1823866781" 
+    placeholder="Nombre completo 3" 
+  >
+
+  <input 
+    type="text" 
+    name="entry.489750825" 
+    placeholder="Nombre completo 4" 
+  >
+    <input 
+    type="text" 
+    name="entry.1999184062" 
+    placeholder="Nombre completo 5"
+  >-->
+
+    <input 
+    type="number" 
+    name="entry.124213269" 
+    placeholder="Número de teléfono (10 dígitos)" 
+    required 
+  >
+
+  <button type="submit" id="rsvpBtn1">Confirmar asistencia</button>
+
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/Sin título-7 copia.webp" alt="Imagen inferior">
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/fotos.webp" alt="Imagen inferior">
 </div>
 
 <div class="apartado-botones">
-  <a class="botonfotos" href="https://photos.app.goo.gl/o9fnGzKwy1xHvWce9" target="_blank">
+  <a class="botonfotos" href="https://photos.app.goo.gl/yDHPBh1AUdUeud5N6" target="_blank">
     Subir o ver fotos
   </a>
 </div>
 
 <div class="imagen-abajo seccion">
-  <img src="xv/Gemini_Generated_Image_nizkkinizkkinizk copia.webp" alt="Imagen inferior">
+  <img src="../xv/Gemini_Generated_Image_nizkkinizkkinizk copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/codigo copia.webp" alt="Imagen inferior">
+  <img src="../img/codigo copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/sugerencia regalo copia.webp" alt="Imagen inferior">
+  <img src="../img/sugerencia regalo copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/RECUERDOS copia.webp" alt="Imagen inferior">
+  <img src="../img/RECUERDOS copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="rsvp-contenedor fondo-blanco">
@@ -942,14 +1006,14 @@ html, body {
 
   <input 
     type="text" 
-    name="entry.1205675882" 
+    name="entry.16954985" 
     placeholder="Nombre" 
     required
   >
 
   <input 
     type="text" 
-    name="entry.1550141184" 
+    name="entry.1095220533" 
     placeholder="Mensaje" 
     required
   >
@@ -963,22 +1027,22 @@ html, body {
 </div>
 
 <div class="imagen-abajo seccion">
-  <img src="xv/Gemini_Generated_Image_wwfx73wwfx73wwfx copia.webp" alt="Imagen inferior">
+  <img src="../xv/Gemini_Generated_Image_wwfx73wwfx73wwfx copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="img/final copia.webp" alt="Imagen inferior">
+  <img src="../img/final copia.webp" alt="Imagen inferior">
 </div>
 
 <a href="https://wa.me/+526621144950" class="btn-img">
-  <img src="img/lusinvitaciones.webp" alt="">
+  <img src="../img/lusinvitaciones.webp" alt="">
 </a>
 
 <!-- ======================= -->
 <!-- SCRIPT CONTADOR -->
 <!-- ======================= -->
 <script>
-const fechaEvento = new Date("2026-03-27T19:00:00");
+const fechaEvento = new Date("2026-08-08T21:00:00");
 
 function actualizarContador() {
   const ahora = new Date();
@@ -1082,7 +1146,8 @@ function abrirInvitacion() {
 
 <script>
 const canciones = [
-  { nombre: "A Dónde Vamos", src: "music/Morat.mp3" }
+  { nombre: "Dance The Night - Dua Lipa", src: "../music/Dance.mp3" },
+  { nombre: "I Don't Want To Talk - Wallows", src: "../music/Dont.mp3" }
 ];
 
 let indice = 0;
@@ -1119,11 +1184,11 @@ function anterior() {
 
 
 function actualizarBotonPlay() {
-  playBtn.src = "img/play.webp";
+  playBtn.src = "../img/play.webp";
 }
 
 function actualizarBotonPause() {
-  playBtn.src = "img/pause.webp";
+  playBtn.src = "../img/pause.webp";
 }
 
 
