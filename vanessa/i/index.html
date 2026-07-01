@@ -66,10 +66,27 @@ body::-webkit-scrollbar {
   border-radius: 16px;        /* opcional: esquinas redondeadas */
 }
 
+.apartado-botonesf {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;           /* espacio entre botones */
+  padding: 20px;       /* espacio interno */
+  box-sizing: border-box;
+  
+  /* CAMBIOS AQUÍ: De color a imagen de fondo */
+  background-image: url('../img/musicafondo.webp'); /* Reemplaza con el enlace o ruta de tu imagen */
+  background-size: cover;                        /* Hace que la imagen cubra todo el espacio sin deformarse */
+  background-position: center;                   /* Centra la imagen en el contenedor */
+  background-repeat: no-repeat;                  /* Evita que la imagen se repita como mosaico */
+  
+  border-radius: 16px;        /* opcional: esquinas redondeadas */
+}
+
 .botonfotos {
   display: inline-block;
   padding: 12px 24px;
-  background: #851448;
+  background: #c4698a;
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -106,7 +123,7 @@ body::-webkit-scrollbar {
 /* ======================= */
 .seccion-musica {
   width: 100%;
-  background: #c01c65; /* morado */
+  background: url('../img/musicafondo.webp') no-repeat center / cover;
   padding: 25px 0px;
   display: flex;
   justify-content: center;
@@ -119,7 +136,7 @@ body::-webkit-scrollbar {
   box-sizing: border-box;
   text-align: center;
 
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 
@@ -129,11 +146,16 @@ body::-webkit-scrollbar {
   margin-bottom: 14px;
 }
 
+.cancion-nombre {
+   display: none; /* 🔥 ocultar el nombre de la canción */
+}
+
+
 /* Barra */
 .barra {
   width: 100%;
   height: 4px;
-  background: rgba(255,255,255,0.35);
+  background: #c4698a;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
@@ -146,11 +168,104 @@ body::-webkit-scrollbar {
   background: #ffffff;
 }
 
+/* Barra */
+/* Barra contenedora */
+/* Ocultar el nombre de la canción */
+.cancion-nombre {
+  display: none !important;
+}
+
+/* Sección Música General */
+.seccion-musica {
+  width: 100%;
+  background: url('../img/musicafondo.webp') no-repeat center / cover;
+  padding: 25px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.musica-contenido {
+  width: 100%;
+  max-width: 520px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+/* Barra contenedora (Rosa) */
+/* Barra contenedora (Rosa) - Centrado Absoluto */
+.barra {
+  width: 100%;                  /* Ocupa el total disponible en pantallas muy chicas */
+  max-width: 280px;             /* 👈 MODIFICA ESTO: Ajusta aquí el ancho de la barra (ej: 250px, 300px) */
+  height: 4px;                  /* Grosor de la línea */
+  background: #c4698a !important;
+  border-radius: 0px !important;
+  cursor: pointer;
+  
+  /* Márgenes y Alineación a prueba de fallos */
+  margin: 20px auto !important; /* Centra horizontalmente en navegadores estándar */
+  align-self: center !important;/* 🔥 FUERZA el centrado si el contenedor usa Flexbox */
+  
+  position: relative;
+  overflow: visible !important; /* Permite que el círculo sobresalga arriba y abajo */
+}
+
+/* Línea blanca de progreso */
+.progreso {
+  height: 100%;
+  width: 0%;
+  background: #c4698a;
+  border-radius: 0px;
+  position: relative;           /* Ancla la burbuja a su extremo derecho */
+  overflow: visible !important; /* 🔥 Impide que se corte la burbuja al inicio */
+}
+
+/* El círculo perfecto (Blindado contra deformaciones) */
+/* El círculo perfecto (Blindado contra deformaciones) */
+.burbuja {
+  display: block !important;
+  position: absolute;
+  
+  /* Lo posicionamos en la pura esquina derecha de la barra blanca */
+  right: 0;
+  top: 50%;
+  
+  /* El truco del margen negativo evita que el círculo altere el ancho de la barra */
+  margin-right: -7px; 
+  
+  /* 🔥 FIX: translateZ(0) fuerza la aceleración por hardware en la GPU */
+  transform: translateY(-50%) translateZ(0) !important;
+  
+  /* 🔥 FIX: Evita el parpadeo y la deformación de bordes en movimiento */
+  backface-visibility: hidden !important;
+  outline: 1px solid transparent !important; 
+  -webkit-backface-visibility: hidden !important;
+  
+  /* Dimensiones fijas e inalterables */
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  
+  /* Forzamos geometría circular */
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+  
+  /* Estilo visual */
+  background: #c4698a !important;
+  
+  /* Evita interferencias en dispositivos táctiles */
+  pointer-events: none !important; 
+}
+
+/* Controles de botones */
 .controles {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 32px; /* un poco más compacto */
+  gap: 32px;
 }
 
 /* Prev y Next */
@@ -284,7 +399,7 @@ body::-webkit-scrollbar {
 
 
 #rsvp-fondo-1 {
-  background-image: url("../img/fondo\ papel\ copia.webp");
+  background-image: url("../img/fondo.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -384,7 +499,7 @@ a:focus {
 
   border: none;              /* 🔥 quita el borde */
   border-radius: 30px;       /* 🔥 esquinas redondas */
-  background: rgb(133, 20, 72);          /* 🔥 color del botón */
+  background: #c4698a;          /* 🔥 color del botón */
   color: white;              /* 🔥 color del texto */
 }
 
@@ -409,7 +524,7 @@ a:focus {
 
 .mapa-contenedor.mapa-alt {
   background: rgb(239, 238, 233);  /* 🔥 ESTE es el nuevo color */
-  background-image: url("../img/mapa\ copia.webp");
+  background-image: url("../img/fondoflor.webp");
   background-size: 100%;
 }
 
@@ -446,7 +561,7 @@ html, body {
   padding: 60px 20px;
   box-sizing: border-box;
   background: #f2f2f2; /* o el color que tengas */
-  background-image: url("../img/mapa1\ copia.webp");
+  background-image: url("../img/fondoflor.webp");
   background-size: 100%;
 }
 
@@ -532,7 +647,7 @@ html, body {
 .boton-mapa {
   display: inline-block;
   padding: 12px 24px;
-  background: #9f2966;
+  background: #c4698a;
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -561,13 +676,13 @@ html, body {
   padding: 30px 10px;
   text-align: center;
   box-sizing: border-box;
+  background-image: url(../img/musicafondo.webp);
 
-    background-image: url(../img/tiempo1\ copia.webp);
-  background-size: 100% 100%;   /* 🔥 ESTIRA aunque se deforme */
-  background-position: center;
-  background-repeat: no-repeat;
+  /* Agrega estas propiedades: */
+  background-size: cover;       /* Rescala la imagen para cubrir todo el ancho, recortando lo sobrante */
+  background-position: center;  /* Centra la imagen para que el recorte vertical sea simétrico (arriba y abajo) */
+  background-repeat: no-repeat; /* Evita que la imagen se duplique si el contenedor cambia de tamaño */
 }
-
 .contador {
   display: flex;
   justify-content: center;
@@ -595,7 +710,7 @@ html, body {
 .etiqueta {
   font-size: clamp(0.7rem, 1.5vw, 1rem);
   letter-spacing: 1px;
-  color: #aeaeae;
+  color: #858585;
 }
 
 .separador {
@@ -606,7 +721,7 @@ html, body {
 
 /* Color general de números */
 #dias, #horas, #minutos {
-  color: #ffffff;   /* blanco o el que quieras */
+  color: #c4698a;   /* blanco o el que quieras */
 }
 
 /* Color especial para segundos */
@@ -617,7 +732,7 @@ html, body {
 /* Estado normal */
 .rsvp-form button {
   transition: background 0.8s ease, transform 0.2s ease;
-  background: #851448;
+  background: #c4698a;
 }
 
 
@@ -700,7 +815,7 @@ html, body {
   <div class="sobre" onclick="abrirInvitacion()">
     <div class="sobre-arriba">
       <img src="../img/sobre-arriba.webp" alt="Sobre arriba">
-      <img src="../img/sello.webp" class="sello" alt="Sello">
+      <img src="../img/sellobien.webp" class="sello" alt="Sello">
 
     </div>
     <div class="sobre-abajo">
@@ -711,20 +826,37 @@ html, body {
 
 <div id="contenido-invitacion" style="display:none;">
 
-<!-- ======================= -->
-<!-- HERO -->
-<!-- ======================= -->
-<div class="hero">
-  <img src="../img/foto.webp" alt="Fondo">
-
- <video autoplay muted loop playsinline>
-    <source src="../img/video.mp4" type="video/mp4">
-  </video>
+<div class="imagen-abajo">
+  <img src="../img/parte1.webp" alt="Imagen inferior">
 </div>
 
-<!-- ======================= -->
-<!-- CONTADOR -->
-<!-- ======================= -->
+<div class="seccion-musica">
+
+  <div class="musica-contenido">
+
+    <div class="cancion-nombre" id="songTitle">Canción</div>
+
+    <div class="barra" id="progressBar">
+      <div class="progreso" id="progress">
+        <span class="burbuja"></span></div>
+    </div>
+
+    <div class="controles">
+        <img src="../img/anterior.webp" onclick="anterior()" alt="Prev">
+        <img src="../img/jugar.webp" id="playBtn" onclick="playPause()" alt="Play">
+        <img src="../img/siguiente.webp" onclick="siguiente()" alt="Next">
+    </div>
+
+    <audio id="audio"></audio>
+
+  </div>
+
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/parte2.webp" alt="Imagen inferior">
+</div>
+
 <div class="contador-box">
   <div class="contador">
 
@@ -755,43 +887,6 @@ html, body {
     </div>
 
   </div>
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/fecha b copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo seccion">
-  <img src="../xv/11 copia.webp" alt="Imagen inferior">
-</div>
-
-<!-- ======================= -->
-<!-- SECCIÓN MÚSICA -->
-<!-- ======================= -->
-<div class="seccion-musica">
-
-  <div class="musica-contenido">
-
-    <div class="cancion-nombre" id="songTitle">Canción</div>
-
-    <div class="barra" id="progressBar">
-      <div class="progreso" id="progress"></div>
-    </div>
-
-    <div class="controles">
-        <img src="../img/prev.webp" onclick="anterior()" alt="Prev">
-        <img src="../img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
-        <img src="../img/next.webp" onclick="siguiente()" alt="Next">
-    </div>
-
-    <audio id="audio"></audio>
-
-  </div>
-
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/padres,padrinosb copia.webp" alt="Imagen inferior">
 </div>
 <!--
 <div class="imagen-abajo">
@@ -841,7 +936,7 @@ html, body {
 </div>-->
 
 <div class="imagen-abajo">
-  <img src="../img/fiesta copiajpg copia.webp" alt="Imagen inferior">
+  <img src="../img/fiesta.webp" alt="Imagen inferior">
 </div>
 
 <div class="mapa-contenedor">
@@ -882,31 +977,26 @@ html, body {
 
 </div>-->
 
-<div class="imagen-abajo seccion">
-  <img src="../xv/22 copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo seccion">
-  <img src="../xv/22 copia2.webp" alt="Imagen inferior">
+<div class="imagen-abajo">
+  <img src="../img/parte3.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="../img/itinerarioo copia.webp" alt="Imagen inferior">
+  <img src="../img/album.webp" alt="Imagen inferior">
 </div>
 
-<!-- ======================= -->
-<!-- BOTÓN DE IMAGEN -->
-<!-- ======================= -->
-<!--<a href="https://wa.me/6623144535" class="boton-imagen">
-  <img src="../img/Sin título-6.jpg" alt="Botón de imagen">
-</a>-->
-
-<!-- ======================= -->
-<!-- CONFIRMACIÓN DE ASISTENCIA -->
-<!-- ======================= -->
+<div class="apartado-botonesf">
+  <a class="botonfotos" href="https://photos.app.goo.gl/yDHPBh1AUdUeud5N6" target="_blank">
+    Subir o ver fotos
+  </a>
+</div>
 
 <div class="imagen-abajo">
-  <img src="../img/3.webp" alt="Imagen inferior">
+  <img src="../img/parte4.webp" alt="Imagen inferior">
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/tres.webp" alt="Imagen inferior">
 </div>
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
@@ -965,36 +1055,14 @@ html, body {
 </div>
 
 <div class="imagen-abajo">
-  <img src="../img/Sin título-7 copia.webp" alt="Imagen inferior">
+  <img src="../img/darclick.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
-  <img src="../img/fotos.webp" alt="Imagen inferior">
+  <img src="../img/libro.webp" alt="Imagen inferior">
 </div>
 
-<div class="apartado-botones">
-  <a class="botonfotos" href="https://photos.app.goo.gl/yDHPBh1AUdUeud5N6" target="_blank">
-    Subir o ver fotos
-  </a>
-</div>
-
-<div class="imagen-abajo seccion">
-  <img src="../xv/Gemini_Generated_Image_nizkkinizkkinizk copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/codigo copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/sugerencia regalo copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/RECUERDOS copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="rsvp-contenedor fondo-blanco">
+<div style="background-image: url('../img/musicafondo.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;" class="rsvp-contenedor fondo-blanco">
 
 <form 
   id="rsvpForm2"
@@ -1026,16 +1094,8 @@ html, body {
 
 </div>
 
-<div class="imagen-abajo seccion">
-  <img src="../xv/Gemini_Generated_Image_wwfx73wwfx73wwfx copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/final copia.webp" alt="Imagen inferior">
-</div>
-
 <a href="https://wa.me/+526621144950" class="btn-img">
-  <img src="../img/lusinvitaciones.webp" alt="">
+  <img src="../img/luz.webp" alt="">
 </a>
 
 <!-- ======================= -->
