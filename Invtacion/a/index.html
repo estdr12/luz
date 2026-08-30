@@ -767,7 +767,7 @@ html, body {
   <img src="../img/portada.jpg" alt="Fondo">
 
 <div class="video-container">
-  <video id="miVideo" autoplay muted playsinline>
+  <video id="miVideo" playsinline>
     <source src="../img/bajoo.mov" type="video/mp4">
   </video>
 </div>
@@ -1187,8 +1187,18 @@ document.body.style.overflow = "hidden";
 function abrirInvitacion() {
   const portada = document.getElementById("portada-sobre");
   const contenido = document.getElementById("contenido-invitacion");
+  const video = document.getElementById('miVideo');
 
   portada.classList.add("abierto");
+
+  // 🔊 Activar sonido y reproducir el video inmediatamente con el clic
+  if (video) {
+    video.muted = false;
+    video.currentTime = 0;
+    video.play().catch(error => {
+      console.log("Error al reproducir el video:", error);
+    });
+  }
 
   setTimeout(() => {
     portada.classList.add("oculto");
@@ -1282,28 +1292,25 @@ document.addEventListener("touchstart", e => {
 });
 
 const video = document.getElementById('miVideo');
-
-// Ajusta este valor al tiempo (en segundos) que quieres que dure el fade-out
-const duracionFade = 1; 
-
+const duracionFade = 1; // Duración del desvanecimiento en segundos
 let desvaneciendo = false;
 
 video.addEventListener('timeupdate', () => {
-  // Calcula el tiempo restante del video
+  if (!video.duration) return;
+  
   const tiempoRestante = video.duration - video.currentTime;
 
-  // Si queda menos tiempo que la duración del desvanecimiento y aún no ha empezado
+  // Inicia el desvanecimiento 1 segundo antes del final
   if (tiempoRestante <= duracionFade && !desvaneciendo) {
     desvaneciendo = true;
     video.classList.add('desvanecer');
   }
 });
 
-// Oculta el video del flujo visual una vez que termina del todo por completo
+// Oculta el video por completo al finalizar
 video.addEventListener('ended', () => {
   video.style.display = 'none';
 });
-
 </script>
 
 </body>
