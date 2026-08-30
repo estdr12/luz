@@ -6,7 +6,7 @@
 <!-- 🔒 Bloquea zoom en móvil -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>Ivanna XV</title>
+<title>Novaly XV</title>
 
 <style>
 
@@ -104,10 +104,9 @@ body::-webkit-scrollbar {
   /* ======================= */
 /* SECCIÓN MÚSICA */
 /* ======================= */
-/* Sección Música General */
 .seccion-musica {
   width: 100%;
-  background: url('../img/fondomusica.webp') no-repeat center / cover;
+  background: #8798ac; /* morado */
   padding: 25px 0px;
   display: flex;
   justify-content: center;
@@ -116,65 +115,35 @@ body::-webkit-scrollbar {
 .musica-contenido {
   width: 100%;
   max-width: 520px;
-  padding: 0 20px;
+  padding: 0 20px;   /* 🔥 aquí controlas el margen real */
   box-sizing: border-box;
   text-align: center;
-  color: rgb(0, 0, 0);
-}
 
-/* Ocultar el nombre de la canción */
-.cancion-nombre {
-  font-size: 1.3rem;
-  margin-bottom: 14px;
   color: white;
 }
 
-/* Barra contenedora */
-.barra {
-  width: 100%;
-  max-width: 280px;
-  height: 4px;
-  background: #c4a03e !important; /* Cambia este HEX al azul de Novaly si lo prefieres */
-  border-radius: 0px !important;
-  cursor: pointer;
-  margin: 20px auto !important;
-  align-self: center !important;
-  position: relative;
-  overflow: visible !important;
+
+/* Nombre canción */
+.cancion-nombre {
+  font-size: 1.3rem;
+  margin-bottom: 14px;
 }
 
-/* Línea de progreso */
+/* Barra */
+.barra {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
 .progreso {
   height: 100%;
   width: 0%;
-  background: #c4a03e; /* Cambia este HEX al color que prefieras */
-  border-radius: 0px;
-  position: relative;
-  overflow: visible !important;
-}
-
-/* Bolita / Burbuja */
-.burbuja {
-  display: block !important;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  margin-right: -7px; 
-  transform: translateY(-50%) translateZ(0) !important;
-  backface-visibility: hidden !important;
-  outline: 1px solid transparent !important; 
-  -webkit-backface-visibility: hidden !important;
-  
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  min-height: 14px !important;
-  aspect-ratio: 1 / 1 !important;
-  border-radius: 50% !important;
-  box-sizing: border-box !important;
-  
-  background: #c4a03e !important; /* Cambia el color de la bolita si lo necesitas */
-  pointer-events: none !important; 
+  background: #ffffff;
 }
 
 .controles {
@@ -282,7 +251,7 @@ body::-webkit-scrollbar {
 /* Parte superior */
 .sobre-arriba {
   position: absolute;
-  top: -4%;
+  top: -8%;
   left: 0;
   width: 100%;
   z-index: 2;
@@ -317,7 +286,7 @@ body::-webkit-scrollbar {
 #rsvp-fondo-1 {
   background-image: url("../img/fondo\ papel\ copia.webp");
   background-size: cover;
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -626,7 +595,7 @@ html, body {
 .etiqueta {
   font-size: clamp(0.7rem, 1.5vw, 1rem);
   letter-spacing: 1px;
-  color: #acacac;
+  color: #666;
 }
 
 .separador {
@@ -722,23 +691,6 @@ html, body {
   transform: translateY(0);
 }
 
-.video-container video {
-  opacity: 1;
-  transition: opacity 1s ease-in-out; /* Controla la duración del desvanecimiento */
-}
-
-.video-container video.desvanecer {
-  opacity: 0;
-}
-
-.video-container video {
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-}
-
-.video-container video.desvanecer {
-  opacity: 0;
-}
 
 </style>
 </head>
@@ -764,13 +716,11 @@ html, body {
 <!-- HERO -->
 <!-- ======================= -->
 <div class="hero">
-  <img src="../img/portada.jpg" alt="Fondo">
+  <img src="../img/video.webp" alt="Fondo">
 
-<div class="video-container">
-  <video id="miVideo" autoplay muted playsinline>
-    <source src="../img/bajoo.mov" type="video/mp4">
+ <video autoplay muted loop playsinline>
+    <source src="../img/novaly.mp4" type="video/mp4">
   </video>
-</div>
 </div>
 
 <!-- ======================= -->
@@ -812,9 +762,8 @@ html, body {
   <img src="../img/fecha b copia.webp" alt="Imagen inferior">
 </div>
 
-
 <div class="imagen-abajo seccion">
-  <img src="../xv/mar3.jpg" alt="Imagen inferior">
+  <img src="../xv/11 copia.webp" alt="Imagen inferior">
 </div>
 
 <!-- ======================= -->
@@ -826,17 +775,13 @@ html, body {
 
     <div class="cancion-nombre" id="songTitle">Canción</div>
 
-<div class="barra" id="progressBar">
-  <div class="progreso" id="progress">
-    <span class="burbuja"></span>
-  </div>
-</div>
+    <div class="barra" id="progressBar">
+      <div class="progreso" id="progress"></div>
+    </div>
 
-<div class="controles">
-  <img src="../img/prev.webp" onclick="anterior()" alt="Prev">
-  <img src="../img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
-  <img src="../img/next.webp" onclick="siguiente()" alt="Next">
-</div>
+    <div class="controles">
+      <img src="../img/play.webp" alt="Play" id="playBtn" onclick="playPause()">
+    </div>
 
     <audio id="audio"></audio>
 
@@ -859,9 +804,9 @@ html, body {
 <div class="mapa-contenedor mapa-alt">
 
   <div class="info-evento">
-    <h2>Parroquia santísima Trinidad</h2>
-    <p>⏰ 5:00 PM</p>
-    <p>📍 Bv. Justo Sierra, Periodista, 83156 Hermosillo, Son.</p>
+    <h2>Parroquia Nuestra Señora del Pilar</h2>
+    <p>⏰ 7:00 PM</p>
+    <p>📍 Av. Saturnino Campoy 705, Sahuaro Indeco, 83171 Hermosillo, Son.</p>
   </div>
 
   <div class="mapa">
@@ -870,7 +815,7 @@ html, body {
 </div>
  </div>
 
-  <a class="boton-mapa" href="https://maps.app.goo.gl/eUW3f4vCTvhYK1MNA" target="_blank">
+  <a class="boton-mapa" href="https://maps.app.goo.gl/H6L8seyj8abA8wF4A" target="_blank">
     📍 Ver en Google Maps
   </a>
 
@@ -901,9 +846,9 @@ html, body {
 <div class="mapa-contenedor">
 
   <div class="info-evento">
-    <h2>Jardín Los Lago</h2>
-    <p>⏰ 9:00 PM - 2:00 AM</p>
-    <p>📍 Lago del Cisne 205, Los Lagos, 83245 Hermosillo, Son.</p>
+    <h2>Jardín la Estanzuela</h2>
+    <p>⏰ 9:00 PM</p>
+    <p>📍 Av. Nácori Grande 466, Carmen Serdán, 83115 Hermosillo, Son.</p>
   </div>
 
   <div class="mapa">
@@ -912,7 +857,7 @@ html, body {
 </div>
  </div>
 
-  <a class="boton-mapa" href="https://maps.app.goo.gl/kKRpMgJ5pprnSqfH6" target="_blank">
+  <a class="boton-mapa" href="https://maps.app.goo.gl/WNZn3VWF4tKSVerV8" target="_blank">
     📍 Ver en Google Maps
   </a>
 
@@ -935,7 +880,7 @@ html, body {
   </a>
 
 </div>-->
-<!--
+
 <div class="imagen-abajo seccion">
   <img src="../xv/22 copia.webp" alt="Imagen inferior">
 </div>
@@ -943,7 +888,7 @@ html, body {
 <div class="imagen-abajo seccion">
   <img src="../xv/22 copia2.webp" alt="Imagen inferior">
 </div>
--->
+
 <div class="imagen-abajo">
   <img src="../img/itinerarioo copia.webp" alt="Imagen inferior">
 </div>
@@ -960,14 +905,14 @@ html, body {
 <!-- ======================= -->
 
 <div class="imagen-abajo">
-  <img src="../img/confirmar copia.webp" alt="Imagen inferior">
+  <img src="../img/4.webp" alt="Imagen inferior">
 </div>
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
 
 <form 
   id="rsvpForm1"
-  action="https://docs.google.com/forms/d/e/1FAIpQLSdhtZaIx4KnKJTSYEjIhaW0lCMzx0f_fFnjsqanrY29i3MiCw/formResponse"
+  action="https://docs.google.com/forms/d/e/1FAIpQLSdIqPBm4uRDpHuTh4AWs4zJz9ttJsrD0nqozeochRtnFlXMDA/formResponse"
   method="POST"
   target="hidden_iframe"
   class="rsvp-form"
@@ -975,37 +920,37 @@ html, body {
 
   <input 
     type="text" 
-    name="entry.95323908" 
+    name="entry.1388284635" 
     placeholder="Nombre completo 1" 
     required
   >
 
   <input 
     type="text" 
-    name="entry.1286454478" 
+    name="entry.1664771209" 
     placeholder="Nombre completo 2" 
   >
 
-  <!--<input
+  <input
     type="text" 
-    name="entry.1511634367" 
+    name="entry.1636724903" 
     placeholder="Nombre completo 3" 
   >
 
   <input 
     type="text" 
-    name="entry.586723465" 
+    name="entry.657544657" 
     placeholder="Nombre completo 4" 
   >
-    <input 
+    <!--<input 
     type="text" 
-    name="entry.1080968525" 
+    name="entry.780307431" 
     placeholder="Nombre completo 5"
   >-->
 
     <input 
     type="number" 
-    name="entry.2035906658" 
+    name="entry.822755879" 
     placeholder="Número de teléfono (10 dígitos)" 
     required 
   >
@@ -1027,13 +972,13 @@ html, body {
 </div>
 
 <div class="apartado-botones">
-  <a class="botonfotos" href="https://photos.app.goo.gl/CN7FGGqqfuszULD58" target="_blank">
+  <a class="botonfotos" href="https://photos.app.goo.gl/o9fnGzKwy1xHvWce9" target="_blank">
     Subir o ver fotos
   </a>
 </div>
 
 <div class="imagen-abajo seccion">
-  <img src="../xv/mar1.jpg" alt="Imagen inferior">
+  <img src="../xv/Gemini_Generated_Image_nizkkinizkkinizk copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
@@ -1052,7 +997,7 @@ html, body {
 
 <form 
   id="rsvpForm2"
-  action="https://docs.google.com/forms/d/e/1FAIpQLScLkfHjBNNJKkhkfHe6sliXIUa3Qb-G3p-zIp4P-ykZuxXqTA/formResponse"
+  action="https://docs.google.com/forms/d/e/1FAIpQLSfyz1NKSGta5SxZboTHxeufUgl3FNzb6wH68TWsr-LjVIurEw/formResponse"
   method="POST"
   target="hidden_iframe"
   class="rsvp-form"
@@ -1060,14 +1005,14 @@ html, body {
 
   <input 
     type="text" 
-    name="entry.1302044616" 
+    name="entry.1205675882" 
     placeholder="Nombre" 
     required
   >
 
   <input 
     type="text" 
-    name="entry.1045214658" 
+    name="entry.1550141184" 
     placeholder="Mensaje" 
     required
   >
@@ -1081,7 +1026,7 @@ html, body {
 </div>
 
 <div class="imagen-abajo seccion">
-  <img src="../xv/mar2.jpg" alt="Imagen inferior">
+  <img src="../xv/Gemini_Generated_Image_wwfx73wwfx73wwfx copia.webp" alt="Imagen inferior">
 </div>
 
 <div class="imagen-abajo">
@@ -1096,7 +1041,7 @@ html, body {
 <!-- SCRIPT CONTADOR -->
 <!-- ======================= -->
 <script>
-const fechaEvento = new Date("2026-10-03T19:00:00");
+const fechaEvento = new Date("2026-03-27T19:00:00");
 
 function actualizarContador() {
   const ahora = new Date();
@@ -1200,9 +1145,7 @@ function abrirInvitacion() {
 
 <script>
 const canciones = [
-  { nombre: "Chiquitita - ABBA", src: "../music/chiquitita.mp3" },
-  { nombre: "If It Wasn't For The Nights - ABBA", src: "../music/night.mp3" },
-  { nombre: "Mamma Mia - ABBA", src: "../music/mamma.mp3" }
+  { nombre: "A Dónde Vamos", src: "../music/Morat.mp3" }
 ];
 
 let indice = 0;
@@ -1279,29 +1222,6 @@ document.addEventListener("touchstart", e => {
     // NO uses preventDefault aquí
     target.style.webkitTouchCallout = "none";
   }
-});
-
-const video = document.getElementById('miVideo');
-
-// Ajusta este valor al tiempo (en segundos) que quieres que dure el fade-out
-const duracionFade = 1; 
-
-let desvaneciendo = false;
-
-video.addEventListener('timeupdate', () => {
-  // Calcula el tiempo restante del video
-  const tiempoRestante = video.duration - video.currentTime;
-
-  // Si queda menos tiempo que la duración del desvanecimiento y aún no ha empezado
-  if (tiempoRestante <= duracionFade && !desvaneciendo) {
-    desvaneciendo = true;
-    video.classList.add('desvanecer');
-  }
-});
-
-// Oculta el video del flujo visual una vez que termina del todo por completo
-video.addEventListener('ended', () => {
-  video.style.display = 'none';
 });
 
 </script>

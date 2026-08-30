@@ -107,7 +107,7 @@ body::-webkit-scrollbar {
 /* Sección Música General */
 .seccion-musica {
   width: 100%;
-  background: url('../img/fondomusica.webp') no-repeat center / cover;
+  background: url('../img/tiempo1\ copia.webp') no-repeat center / cover;
   padding: 25px 0px;
   display: flex;
   justify-content: center;
@@ -722,23 +722,6 @@ html, body {
   transform: translateY(0);
 }
 
-.video-container video {
-  opacity: 1;
-  transition: opacity 1s ease-in-out; /* Controla la duración del desvanecimiento */
-}
-
-.video-container video.desvanecer {
-  opacity: 0;
-}
-
-.video-container video {
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-}
-
-.video-container video.desvanecer {
-  opacity: 0;
-}
 
 </style>
 </head>
@@ -764,13 +747,8 @@ html, body {
 <!-- HERO -->
 <!-- ======================= -->
 <div class="hero">
-  <img src="../img/portada.jpg" alt="Fondo">
+  <img src="../img/video.webp" alt="Fondo">
 
-<div class="video-container">
-  <video id="miVideo" autoplay muted playsinline>
-    <source src="../img/bajoo.mov" type="video/mp4">
-  </video>
-</div>
 </div>
 
 <!-- ======================= -->
@@ -833,9 +811,9 @@ html, body {
 </div>
 
 <div class="controles">
-  <img src="../img/prev.webp" onclick="anterior()" alt="Prev">
+
   <img src="../img/play.webp" id="playBtn" onclick="playPause()" alt="Play">
-  <img src="../img/next.webp" onclick="siguiente()" alt="Next">
+
 </div>
 
     <audio id="audio"></audio>
@@ -901,9 +879,9 @@ html, body {
 <div class="mapa-contenedor">
 
   <div class="info-evento">
-    <h2>Jardín Los Lago</h2>
+    <h2>Jardín del Lago</h2>
     <p>⏰ 9:00 PM - 2:00 AM</p>
-    <p>📍 Lago del Cisne 205, Los Lagos, 83245 Hermosillo, Son.</p>
+    <p>📍 Pvda. Deserti 20, Santa Clara, 83284 Hermosillo, Son.</p>
   </div>
 
   <div class="mapa">
@@ -912,7 +890,7 @@ html, body {
 </div>
  </div>
 
-  <a class="boton-mapa" href="https://maps.app.goo.gl/kKRpMgJ5pprnSqfH6" target="_blank">
+  <a class="boton-mapa" href="https://maps.app.goo.gl/NSbojSSg5i87ArpZ6" target="_blank">
     📍 Ver en Google Maps
   </a>
 
@@ -1200,9 +1178,7 @@ function abrirInvitacion() {
 
 <script>
 const canciones = [
-  { nombre: "Chiquitita - ABBA", src: "../music/chiquitita.mp3" },
-  { nombre: "If It Wasn't For The Nights - ABBA", src: "../music/night.mp3" },
-  { nombre: "Mamma Mia - ABBA", src: "../music/mamma.mp3" }
+  { nombre: "Mi Princesita", src: "../music/princesa.mp3" }
 ];
 
 let indice = 0;
@@ -1279,29 +1255,6 @@ document.addEventListener("touchstart", e => {
     // NO uses preventDefault aquí
     target.style.webkitTouchCallout = "none";
   }
-});
-
-const video = document.getElementById('miVideo');
-
-// Ajusta este valor al tiempo (en segundos) que quieres que dure el fade-out
-const duracionFade = 1; 
-
-let desvaneciendo = false;
-
-video.addEventListener('timeupdate', () => {
-  // Calcula el tiempo restante del video
-  const tiempoRestante = video.duration - video.currentTime;
-
-  // Si queda menos tiempo que la duración del desvanecimiento y aún no ha empezado
-  if (tiempoRestante <= duracionFade && !desvaneciendo) {
-    desvaneciendo = true;
-    video.classList.add('desvanecer');
-  }
-});
-
-// Oculta el video del flujo visual una vez que termina del todo por completo
-video.addEventListener('ended', () => {
-  video.style.display = 'none';
 });
 
 </script>
