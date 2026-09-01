@@ -98,7 +98,7 @@ input {
 <div id="contenedor"></div>
 
 <script>
-const sheetID = "1aoS1DHHzcyfaHZQbGRHebk1TbyLUhSk_BS-CHAHb_Eo";
+const sheetID = "1YeleKZa-BxZMU7pf7AYT5wLjpdPctqTmh2GIcHngQiA";
 const url = `https://opensheet.elk.sh/${sheetID}/Respuestas%20de%20formulario%201`;
 
 let todasLasRespuestas = [];
@@ -128,10 +128,10 @@ function renderizar(lista) {
 contenedor.innerHTML += `
   <div class="card">
     <p style="font-size:1.05rem; line-height:1.4; margin-top:0;">
-      ${resp["Nombre"] || ""}
+      ${resp["Mensaje"] || ""}
     </p>
     <div style="margin-top:10px; text-align:right; font-style:italic; color:#555;">
-      — ${resp["Mensaje"] || ""}
+      — ${resp["Nombre"] || ""}
     </div>
   </div>
 `;
