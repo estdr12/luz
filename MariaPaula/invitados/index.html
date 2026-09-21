@@ -160,7 +160,7 @@
 <div id="contenedor"></div>
 
 <script>
-const sheetID = "1Y9YnKMn8nmJt4NvQdtk8CiCg8BQFzqe7ldqqpYhXBoQ";
+const sheetID = "1xSHbML6FhNQKyfKaiNOFj-zOTujLbwYoLG0R4MwqjT4";
 const url = `https://opensheet.elk.sh/${sheetID}/Respuestas%20de%20formulario%201`;
 
 let todasLasRespuestas = [];
@@ -230,7 +230,6 @@ function renderizar(lista) {
       ${mostrar("Invitado 3:", resp["Nombre3"])}
       ${mostrar("Invitado 4:", resp["Nombre4"])}
       ${mostrar("Invitado 5:", resp["Nombre5"])}
-      <p><span class="label">Número:</span> ${resp["Numero"] || ""}</p>
     </div>`;
 
     contenedor.innerHTML += tarjeta;
