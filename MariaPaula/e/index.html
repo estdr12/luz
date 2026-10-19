@@ -1224,15 +1224,17 @@ function activarFormulario(formId, btnId, modo = "bloquear") {
 
   const textoOriginal = btn.textContent;
 
-  // 🛠️ ASEGURAR QUE INICIE LIMPIO: Descongela el botón al cargar la página
-  form.reset();
-  btn.disabled = false;
-  btn.textContent = textoOriginal;
-  btn.classList.remove("boton-enviado");
-  btn.style.cursor = "pointer";
+  // 🔄 Forzar reinicio completo cada vez que se carga o muestra la página
+  window.addEventListener('pageshow', function(event) {
+    form.reset();
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+    btn.classList.remove("boton-enviado");
+    btn.style.cursor = "pointer";
+  });
 
   form.addEventListener("submit", function(e) {
-    // Cambiar estado visual del botón de inmediato
+    // Cambiar estado visual del botón de inmediato al enviar
     setTimeout(() => {
       btn.textContent = "Enviado";
       btn.classList.add("boton-enviado");
