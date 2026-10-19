@@ -1224,16 +1224,16 @@ function activarFormulario(formId, btnId, modo = "bloquear") {
 
   const textoOriginal = btn.textContent;
 
-  form.addEventListener("submit", function() {
+  // 🛠️ ASEGURAR QUE INICIE LIMPIO: Descongela el botón al cargar la página
+  form.reset();
+  btn.disabled = false;
+  btn.textContent = textoOriginal;
+  btn.classList.remove("boton-enviado");
+  btn.style.cursor = "pointer";
 
-    // ⏱️ Espera un pelín para que el navegador mande los datos
+  form.addEventListener("submit", function(e) {
+    // Cambiar estado visual del botón de inmediato
     setTimeout(() => {
-      form.reset(); // ✅ ahora sí se borra sin romper el envío
-    }, 600);
-
-    // Animación del botón (independiente del borrado)
-    setTimeout(() => {
-
       btn.textContent = "Enviado";
       btn.classList.add("boton-enviado");
       btn.style.cursor = "default";
@@ -1241,6 +1241,11 @@ function activarFormulario(formId, btnId, modo = "bloquear") {
       if (modo === "bloquear") {
         btn.disabled = true;
       }
+    }, 100);
+
+    // Margen seguro para enviar al iframe y limpiar
+    setTimeout(() => {
+      form.reset(); 
 
       if (modo === "resetear") {
         setTimeout(() => {
@@ -1250,8 +1255,7 @@ function activarFormulario(formId, btnId, modo = "bloquear") {
           btn.disabled = false;
         }, 2000);
       }
-
-    }, 100);
+    }, 1000);
   });
 }
 
