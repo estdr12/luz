@@ -129,7 +129,7 @@
 ">
   <img 
     src="img/Paginarecuerdos.webp"
-    alt="Invitados XV Eimy"
+    alt="Invitados XV"
     style="
       height: 250px;     /* mantiene proporciones */
       display: block;
@@ -160,7 +160,7 @@
 <div id="contenedor"></div>
 
 <script>
-const sheetID = "1xSHbML6FhNQKyfKaiNOFj-zOTujLbwYoLG0R4MwqjT4";
+const sheetID = "10N6mH36DDkBuog4oWUU_t6xMG6klDekXOW3n5_Ttyo4";
 const url = `https://opensheet.elk.sh/${sheetID}/Respuestas%20de%20formulario%201`;
 
 let todasLasRespuestas = [];
@@ -230,6 +230,7 @@ function renderizar(lista) {
       ${mostrar("Invitado 3:", resp["Nombre3"])}
       ${mostrar("Invitado 4:", resp["Nombre4"])}
       ${mostrar("Invitado 5:", resp["Nombre5"])}
+      <p><span class="label">Número:</span> ${resp["Numero"] || ""}</p>
     </div>`;
 
     contenedor.innerHTML += tarjeta;
