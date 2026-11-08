@@ -75,7 +75,7 @@ body::-webkit-scrollbar {
 .botonfotos {
   display: inline-block;
   padding: 12px 24px;
-  background: #d0b997;
+  background: #e3b5bf;
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -421,7 +421,7 @@ a:focus {
 
   border: none;              /* 🔥 quita el borde */
   border-radius: 30px;       /* 🔥 esquinas redondas */
-  background: #d0b997;          /* 🔥 color del botón */
+  background: #e3b5bf;          /* 🔥 color del botón */
   color: white;              /* 🔥 color del texto */
 }
 
@@ -470,8 +470,8 @@ html, body {
 /* ======================= */
 .hero {
   position: relative;
-  width: 100%;       /* ⚠️ NO usar 100vw */
-  height: 100vh;
+  width: 100%;
+  height: 0px;      /* Crecerá más si la imagen es más alta */
   overflow: hidden;
   background: black;
 }
@@ -492,7 +492,8 @@ html, body {
   max-width: 900px;  /* 🔥 aquí controlas el ancho */
   border-radius: 16px;
   overflow: hidden; /* recorta bordes del iframe */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+ /*
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);*/
 }
 
 .mapa iframe {
@@ -569,7 +570,7 @@ html, body {
 .boton-mapa {
   display: inline-block;
   padding: 12px 24px;
-  background: #d0b997;
+  background: #e3b5bf;
   color: white;
   text-decoration: none;
   border-radius: 30px;
@@ -654,7 +655,7 @@ html, body {
 /* Estado normal */
 .rsvp-form button {
   transition: background 0.8s ease, transform 0.2s ease;
-  background: #d0b997;
+  background: #e3b5bf;
 }
 
 
@@ -883,13 +884,18 @@ html, body {
 <!-- ======================= -->
 <!-- HERO -->
 <!-- ======================= -->
+ <!--
 <div class="hero">
   <img style="width: 100%; height: auto; display: block;" src="../img/p.webp" alt="Fondo">
 
 <video style="width: 100%; height: auto; display: block;" autoplay muted loop playsinline>
   <source src="../img/p1.mp4" type="video/mp4">
 </video>
+</div>
+-->
 
+<div class="imagen-abajo">
+  <img src="../img/p.webp" alt="Imagen inferior">
 </div>
 
 <!-- ======================= -->
@@ -977,6 +983,7 @@ html, body {
   </div>
 
   <div class="mapa">
+
 <div class="imagen-abajo">
   <img src="../img/Iglesia.webp" alt="Imagen inferior">
 </div>
@@ -1019,6 +1026,8 @@ html, body {
   </div>
 
   <div class="mapa">
+
+
 <div class="imagen-abajo">
   <img src="../img/jardin.webp" alt="Imagen inferior">
 </div>
@@ -1079,6 +1088,55 @@ html, body {
 <!-- CONFIRMACIÓN DE ASISTENCIA -->
 <!-- ======================= -->
 
+<!-- <div class="imagen-abajo seccion">
+  <img src="../xv/f4.jpg" alt="Imagen inferior">
+</div> -->
+
+<div class="imagen-abajo">
+  <img src="../img/codigobb.webp" alt="Imagen inferior">
+</div>
+
+<div class="imagen-abajo">
+  <img src="../img/sugerencia regalo copia.webp" alt="Imagen inferior">
+</div>
+
+
+<div class="imagen-abajo">
+  <img src="../img/RECUERDOS copia.webp" alt="Imagen inferior">
+</div>
+
+<div class="rsvp-contenedor fondo-blanco">
+
+<form 
+  id="rsvpForm2"
+  action="https://docs.google.com/forms/d/e/1FAIpQLScHo40iWot_aTluJE7CYsC-PYaD2os6DwIj6lJnjE4M5oZg/formResponse"
+  method="POST"
+  target="hidden_iframe"
+  class="rsvp-form"
+>
+
+  <input 
+    type="text" 
+    name="entry.1061122471" 
+    placeholder="Nombre" 
+    required
+  >
+
+  <input 
+    type="text" 
+    name="entry.1945052743" 
+    placeholder="Mensaje" 
+    required
+  >
+
+  <button type="submit" id="rsvpBtn2">Enviar</button>
+
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+</div>
+
 <div class="imagen-abajo">
   <img src="../img/1.webp" alt="Imagen inferior">
 </div>
@@ -1138,68 +1196,6 @@ html, body {
 
 </div>
 
-<div class="imagen-abajo">
-  <img src="../img/Sin título-7 copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/fotos.webp" alt="Imagen inferior">
-</div>
-
-<div class="apartado-botones">
-  <a class="botonfotos" href="https://photos.app.goo.gl/1Mx9ak5mqmjEEm7E9" target="_blank">
-    Subir o ver fotos
-  </a>
-</div>
-
-<!-- <div class="imagen-abajo seccion">
-  <img src="../xv/f4.jpg" alt="Imagen inferior">
-</div> -->
-
-<div class="imagen-abajo">
-  <img src="../img/codigobb.webp" alt="Imagen inferior">
-</div>
-
-<div class="imagen-abajo">
-  <img src="../img/sugerencia regalo copia.webp" alt="Imagen inferior">
-</div>
-
-
-<div class="imagen-abajo">
-  <img src="../img/RECUERDOS copia.webp" alt="Imagen inferior">
-</div>
-
-<div class="rsvp-contenedor fondo-blanco">
-
-<form 
-  id="rsvpForm2"
-  action="https://docs.google.com/forms/d/e/1FAIpQLScHo40iWot_aTluJE7CYsC-PYaD2os6DwIj6lJnjE4M5oZg/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  class="rsvp-form"
->
-
-  <input 
-    type="text" 
-    name="entry.1061122471" 
-    placeholder="Nombre" 
-    required
-  >
-
-  <input 
-    type="text" 
-    name="entry.1945052743" 
-    placeholder="Mensaje" 
-    required
-  >
-
-  <button type="submit" id="rsvpBtn2">Enviar</button>
-
-</form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-</div>
 <!--
 <div class="imagen-abajo seccion">
   <img src="../xv/f5.jpg" alt="Imagen inferior">
