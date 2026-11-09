@@ -1078,13 +1078,7 @@ html, body {
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
 
-<form 
-  id="rsvpForm1"
-  action="https://docs.google.com/forms/d/e/1FAIpQLSdXyrvjQsETbmll7HG88ELwfjlAWIsTGVj6wryHJvRMgx4MjA/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  class="rsvp-form"
->
+<form id="rsvpForm1" class="rsvp-form">
 
   <input 
     type="text" 
@@ -1099,7 +1093,7 @@ html, body {
     placeholder="Nombre completo 2" 
   >
 
-  <!--<input
+ <!--<input
     type="text" 
     name="entry.214080938" 
     placeholder="Nombre completo 3" 
@@ -1114,7 +1108,7 @@ html, body {
     type="text" 
     name="entry.1775913005" 
     placeholder="Nombre completo 5"
-  >-->
+  > -->
 
       <input 
     type="number" 
@@ -1126,9 +1120,9 @@ html, body {
   <button type="submit" id="rsvpBtn1">Confirmar asistencia</button>
 
 </form>
-
+<!---
 <iframe name="hidden_iframe" style="display:none;"></iframe>
-
+--->
 </div>
 
 <div class="imagen-abajo">
@@ -1521,6 +1515,51 @@ function copiarCuenta() {
     btn.classList.remove("copiado");
   }, 2000);
 }
+</script>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0Kbzp5AyyzSEhOXBvTDsHY_OPmmlOEN_xQuKG2b-7Bazr1omkC-pl94dgBOU_qwUnjA/exec"; // 👈 No olvides cambiar esto por tu URL que termina en /exec
+
+document.getElementById("rsvpForm1").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const btn = document.getElementById("rsvpBtn1");
+  const textoOriginal = "Confirmar asistencia";
+
+  // Estado cargando
+  btn.textContent = "Confirmando...";
+  btn.disabled = true;
+
+  const data = new URLSearchParams(new FormData(this));
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: data
+  })
+  .then(res => res.json())
+  .then(response => {
+    if (response.result === "success") {
+      btn.textContent = "¡Asistencia enviada!";
+      btn.classList.add("boton-enviado");
+      btn.style.cursor = "default";
+      this.reset();
+    } else {
+      alert("No se pudo registrar la asistencia. Intenta nuevamente.");
+      btn.disabled = false;
+      btn.textContent = textoOriginal;
+    }
+  })
+  .catch(error => {
+    alert("Hubo un problema de conexión. Por favor intenta de nuevo.");
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  });
+});
+</script>
+
+<script>
+// El formulario 2 (el de los deseos/mensajes) lo puedes dejar con su función normal si te gustaba cómo funcionaba:
+activarFormulario("rsvpForm2", "rsvpBtn2", "resetear");
 </script>
 
 </body>

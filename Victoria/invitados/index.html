@@ -230,6 +230,7 @@ function renderizar(lista) {
       ${mostrar("Invitado 3:", resp["Nombre3"])}
       ${mostrar("Invitado 4:", resp["Nombre4"])}
       ${mostrar("Invitado 5:", resp["Nombre5"])}
+            <p><span class="label">Número:</span> ${resp["Numero"] || ""}</p>
     </div>`;
 
     contenedor.innerHTML += tarjeta;
