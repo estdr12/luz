@@ -1039,7 +1039,7 @@ html, body {
 
 
 <div class="imagen-abajo">
-  <img src="../img/jardin.webp" alt="Imagen inferior">
+  <img src="../img/fiesta.webp" alt="Imagen inferior">
 </div>
  </div>
 
@@ -1117,13 +1117,7 @@ html, body {
 
 <div class="rsvp-contenedor fondo-blanco">
 
-<form 
-  id="rsvpForm2"
-  action="https://docs.google.com/forms/d/e/1FAIpQLSeUkt_l37uh7GHkv0Q6Kgwtv8NcpuyxjtG-86gVwiu1um9T6w/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  class="rsvp-form"
->
+<form id="rsvpForm2" class="rsvp-form">
 
   <input 
     type="text" 
@@ -1143,8 +1137,6 @@ html, body {
 
 </form>
 
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
 </div>
 
 <div class="imagen-abajo">
@@ -1153,13 +1145,7 @@ html, body {
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
 
-<form 
-  id="rsvpForm1"
-  action="https://docs.google.com/forms/d/e/1FAIpQLSdTj7QDeBgervbvnlBkGbVjxbFkWzU_oVIrftLT58uN5Ga6cw/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  class="rsvp-form"
->
+<form id="rsvpForm1" class="rsvp-form">
 
   <input 
     type="text" 
@@ -1168,7 +1154,7 @@ html, body {
     required
   >
 
- <!-- <input 
+ <!--<input 
     type="text" 
     name="entry.1738788300" 
     placeholder="Nombre completo 2" 
@@ -1189,7 +1175,7 @@ html, body {
     type="text" 
     name="entry.1603721559" 
     placeholder="Nombre completo 5"
-  >-->
+  > -->
 
     <input 
     type="number" 
@@ -1201,8 +1187,6 @@ html, body {
   <button type="submit" id="rsvpBtn1">Confirmar asistencia</button>
 
 </form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
@@ -1530,6 +1514,55 @@ function copiarCuenta() {
     btn.classList.remove("copiado");
   }, 2000);
 }
+</script>
+
+<script>
+const URL_ASISTENCIAS = "https://script.google.com/macros/s/AKfycbyKp8Zkk0dTOVU8M8FpLlJmdpEjOywZUMt4-qwlTW6fIEj3AnOJ0z3etNODO7WVaJZ4_w/exec";
+const URL_MENSAJES = "https://script.google.com/macros/s/AKfycbz5Rd4w-TT_0ai6Nyzv4YtpEq6ta6I1geI-X8fmlcyDHAfg1B5V2kyoKvzSZ7TpWbcv/exec";
+
+// Función general para enviar por fetch
+function configurarFormulario(formId, btnId, scriptUrl, textoOriginal, mensajeExito) {
+  const form = document.getElementById(formId);
+  const btn = document.getElementById(btnId);
+
+  if (!form || !btn) return;
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    btn.textContent = "Enviando...";
+    btn.disabled = true;
+
+    const data = new URLSearchParams(new FormData(this));
+
+    fetch(scriptUrl, {
+      method: "POST",
+      body: data
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.result === "success") {
+        btn.textContent = mensajeExito;
+        btn.classList.add("boton-enviado");
+        btn.style.cursor = "default";
+        this.reset();
+      } else {
+        alert("No se pudo registrar. Intenta nuevamente.");
+        btn.disabled = false;
+        btn.textContent = textoOriginal;
+      }
+    })
+    .catch(error => {
+      alert("Hubo un problema de conexión. Inténtalo de nuevo.");
+      btn.disabled = false;
+      btn.textContent = textoOriginal;
+    });
+  });
+}
+
+// Conectar cada formulario con su respectiva URL de Apps Script
+configurarFormulario("rsvpForm1", "rsvpBtn1", URL_ASISTENCIAS, "Confirmar asistencia", "¡Asistencia enviada!");
+configurarFormulario("rsvpForm2", "rsvpBtn2", URL_MENSAJES, "Enviar", "¡Mensaje enviado!");
 </script>
 
 </body>
