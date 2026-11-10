@@ -1087,13 +1087,7 @@ html, body {
 
 <div class="rsvp-contenedor" id="rsvp-fondo-1">
 
-<form 
-  id="rsvpForm1"
-  action="https://docs.google.com/forms/d/e/1FAIpQLSe9i6rfSD5R7iiZS3A6svJbfuPu_TZ_lMXwPPfnJreaytcsTg/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  class="rsvp-form"
->
+<form id="rsvpForm1" class="rsvp-form">
 
   <input 
     type="text" 
@@ -1114,7 +1108,7 @@ html, body {
     placeholder="Nombre completo 3" 
   >
 
- <!--  <input 
+ <!-- <input 
     type="text" 
     name="entry.1650184721" 
     placeholder="Nombre completo 4" 
@@ -1123,7 +1117,7 @@ html, body {
     type="text" 
     name="entry.1185234848" 
     placeholder="Nombre completo 5"
-  >-->
+  > -->
 
     <input 
     type="number" 
@@ -1135,8 +1129,6 @@ html, body {
   <button type="submit" id="rsvpBtn1">Confirmar asistencia</button>
 
 </form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
@@ -1173,13 +1165,7 @@ html, body {
 
 <div class="rsvp-contenedor fondo-blanco">
 
-<form 
-  id="rsvpForm2"
-  action="https://docs.google.com/forms/d/e/1FAIpQLScHo40iWot_aTluJE7CYsAeC-PYaD2os6DwIj6lJnjE4M5oZg/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  class="rsvp-form"
->
+<form id="rsvpForm2" class="rsvp-form">
 
   <input 
     type="text" 
@@ -1198,8 +1184,6 @@ html, body {
   <button type="submit" id="rsvpBtn2">Enviar</button>
 
 </form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
@@ -1527,6 +1511,53 @@ function copiarCuenta() {
     btn.classList.remove("copiado");
   }, 2000);
 }
+</script>
+
+<script>
+const URL_ASISTENCIAS = "https://script.google.com/macros/s/AKfycbzAXinJ5-9BR4F_20OVXUQTWRyf_2fXX0g0FTqb8kdAfuZxnJWXH799JmK_6-iIz0zB/exec";
+const URL_MENSAJES = "https://script.google.com/macros/s/AKfycbx_71bHonYnfkFv4jeQzpkskUNKA3QDn62xgslWx5M1wRvzxmThm4a2WR_Ms4ePRy02/exec";
+
+function configurarFormulario(formId, btnId, scriptUrl, textoOriginal, mensajeExito) {
+  const form = document.getElementById(formId);
+  const btn = document.getElementById(btnId);
+
+  if (!form || !btn) return;
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    btn.textContent = "Enviando...";
+    btn.disabled = true;
+
+    const data = new URLSearchParams(new FormData(this));
+
+    fetch(scriptUrl, {
+      method: "POST",
+      body: data
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.result === "success") {
+        btn.textContent = mensajeExito;
+        btn.classList.add("boton-enviado");
+        btn.style.cursor = "default";
+        this.reset();
+      } else {
+        alert("No se pudo registrar. Intenta nuevamente.");
+        btn.disabled = false;
+        btn.textContent = textoOriginal;
+      }
+    })
+    .catch(error => {
+      alert("Hubo un problema de conexión. Inténtalo de nuevo.");
+      btn.disabled = false;
+      btn.textContent = textoOriginal;
+    });
+  });
+}
+
+configurarFormulario("rsvpForm1", "rsvpBtn1", URL_ASISTENCIAS, "Confirmar asistencia", "¡Asistencia enviada!");
+configurarFormulario("rsvpForm2", "rsvpBtn2", URL_MENSAJES, "Enviar", "¡Mensaje enviado!");
 </script>
 
 </body>
